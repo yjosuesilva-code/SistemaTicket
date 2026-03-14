@@ -2,10 +2,7 @@ package Dao;
 
 import Model.Vehiculo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,5 +79,17 @@ public class VehiculoDao {
             return true;
         }
         return false;
+    }
+
+    private void escribirLinea(Vehiculo v) {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs(); // crea carpeta data/ si no existe
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+            bw.write(aLinea(v));
+            bw.newLine();
+        } catch (IOException e) {
+            System.err.println("[VehiculoDAO] Error al escribir línea: " + e.getMessage());
+        }
     }
 }
