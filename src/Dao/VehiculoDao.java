@@ -92,4 +92,18 @@ public class VehiculoDao {
             System.err.println("[VehiculoDAO] Error al escribir línea: " + e.getMessage());
         }
     }
+
+    private void escribirArchivo() {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {
+            for (Vehiculo v : lista) {
+                bw.write(aLinea(v));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("[VehiculoDAO] Error al reescribir archivo: " + e.getMessage());
+        }
+    }
 }
