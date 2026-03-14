@@ -130,4 +130,50 @@ public class VehiculoDao {
                 v.isDisponible() + ";" +
                 v.getTarifaBase();
     }
+
+    private Vehiculo parsearLinea(String linea) {
+        String[] partes = linea.split(";");
+
+        if (partes.length != 7) {
+            System.err.println("[VehiculoDAO] Línea con formato incorrecto: " + linea);
+            return null;
+        }
+
+        try {
+            String tipo             = partes[0].trim().toUpperCase();
+            String placa            = partes[1].trim();
+            String ruta             = partes[2].trim();
+            int    capacidadMaxima  = Integer.parseInt(partes[3].trim());
+            int    contadorPasajeros= Integer.parseInt(partes[4].trim());
+            boolean disponible      = Boolean.parseBoolean(partes[5].trim());
+            double tarifaBase       = Double.parseDouble(partes[6].trim());
+
+            Vehiculo v;
+
+            switch (tipo) {
+                case "BUSETA":
+                    v = new Buseta(placa, ruta);
+                    break;
+                case "MICROBUS":
+                    v = new MicroBus(placa, ruta);
+                    break;
+                case "BUS":
+                    v = new Bus(placa, ruta);
+                    break;
+                default:
+                    System.err.println("[VehiculoDAO] Tipo de vehículo desconocido: " + tipo);
+                    return null;
+            }
+
+            v.setContadorPasajeros(contadorPasajeros);
+            v.setDisponible(disponible);
+            v.setTarifaBase(tarifaBase);
+
+            return v;
+
+        } catch (NumberFormatException e) {
+            System.err.println("[VehiculoDAO] Error al parsear números en línea: " + linea);
+            return null;
+        }
+    }
 }
