@@ -73,4 +73,14 @@ public class VehiculoDao {
         }
         return false;
     }
+
+    public boolean eliminar(String placa) {
+        Vehiculo encontrado = buscarPorPlaca(placa);
+        if (encontrado != null) {
+            lista.remove(encontrado);
+            escribirArchivo();
+            return true;
+        }
+        return false;
+    }
 }
