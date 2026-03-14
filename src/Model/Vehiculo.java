@@ -71,4 +71,16 @@ public abstract class Vehiculo {
     }
 
     public abstract void imprimirDetalle();
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "placa='" + placa + '\'' +
+                ", ruta='" + ruta + '\'' +
+                ", capacidadMaxima=" + capacidadMaxima +
+                ", contadorPasajeros=" + contadorPasajeros +
+                ", disponible=" + disponible +
+                ", tarifaBase=" + tarifaBase +
+                '}';
+    }
 }
