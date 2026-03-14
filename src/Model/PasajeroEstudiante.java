@@ -14,4 +14,9 @@ public class PasajeroEstudiante extends Pasajero{
 
     }
 
+    @Override
+    public String toString() {
+        return "pasajeroEstudiante " + super.toString();
+    }
+
 }
