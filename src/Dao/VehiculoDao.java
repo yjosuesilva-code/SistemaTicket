@@ -48,4 +48,18 @@ public class VehiculoDao {
 
         return lista;
     }
+
+    public List<Vehiculo> listarTodos() {
+        return new ArrayList<>(lista);
+    }
+
+
+    public Vehiculo buscarPorPlaca(String placa) {
+        for (Vehiculo v : lista) {
+            if (v.getPlaca().equalsIgnoreCase(placa.trim())) {
+                return v;
+            }
+        }
+        return null;
+    }
 }
