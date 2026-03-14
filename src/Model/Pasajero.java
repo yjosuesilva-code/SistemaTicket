@@ -21,5 +21,9 @@ public abstract class Pasajero extends Persona {
 
     public abstract double calcularDescuento();
 
-
+    @Override
+    public String toString() {
+        return "Pasajero " +"\n"+ super.toString()+
+                "\ntipoPasajero='" + tipoPasajero;
+    }
 }
