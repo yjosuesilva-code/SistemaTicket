@@ -14,4 +14,10 @@ public class PasajeroRegular extends Pasajero{
     public void imprimirDetalle() {
 
     }
+
+    @Override
+    public String toString() {
+        return "PasajeroRegular " + super.toString();
+    }
+
 }
