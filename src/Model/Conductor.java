@@ -34,4 +34,12 @@ public class Conductor extends Persona{
     public void imprimirDetalle() {
 
     }
+
+    @Override
+    public String toString() {
+        return "Conductor{"+ super.toString() +
+                "CateLicencia='" + CateLicencia + '\'' +
+                ", numLicencia='" + numLicencia + '\'' +
+                "} " ;
+    }
 }
