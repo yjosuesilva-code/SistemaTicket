@@ -7,4 +7,18 @@ public class Buseta extends Vehiculo{
     public Buseta(String placa, String ruta) {
         super(placa, ruta, 19, 0, true, 8000);
     }
+
+    public void imprimirDetalle() {
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║          DETALLE – BUSETA            ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.printf( "║  Placa          : %-18s  ║%n", getPlaca());
+        System.out.printf( "║  Ruta           : %-18s  ║%n", getRuta());
+        System.out.printf( "║  Capacidad max  : %-18d  ║%n", getCapacidadMaxima());
+        System.out.printf( "║  Pasajeros      : %-18d  ║%n", getContadorPasajeros());
+        System.out.printf( "║  Cupos libres   : %-18d  ║%n", getCapacidadMaxima() - getContadorPasajeros());
+        System.out.printf( "║  Disponible     : %-18s  ║%n", isDisponible() ? "Sí" : "No");
+        System.out.printf( "║  Tarifa base    : $%-17.0f  ║%n", getTarifaBase());
+        System.out.println("╚══════════════════════════════════════╝");
+    }
 }
