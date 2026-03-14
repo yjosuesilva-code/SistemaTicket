@@ -12,5 +12,8 @@ public class PasajeroAdultoMayor extends Pasajero{
     @Override
     public void imprimirDetalle() {
     }
-
+    @Override
+    public String toString() {
+        return "PasajeroAdultoMayor " + super.toString();
+    }
 }
