@@ -1,5 +1,8 @@
 package Dao;
 
+import Model.Bus;
+import Model.Buseta;
+import Model.MicroBus;
 import Model.Vehiculo;
 
 import java.io.*;
@@ -105,5 +108,26 @@ public class VehiculoDao {
         } catch (IOException e) {
             System.err.println("[VehiculoDAO] Error al reescribir archivo: " + e.getMessage());
         }
+    }
+
+    private String aLinea(Vehiculo v) {
+        String tipo;
+        if (v instanceof Buseta) {
+            tipo = "BUSETA";
+        } else if (v instanceof MicroBus) {
+            tipo = "MICROBUS";
+        } else if (v instanceof Bus) {
+            tipo = "BUS";
+        } else {
+            tipo = "DESCONOCIDO";
+        }
+
+        return tipo + ";" +
+                v.getPlaca() + ";" +
+                v.getRuta() + ";" +
+                v.getCapacidadMaxima() + ";" +
+                v.getContadorPasajeros() + ";" +
+                v.isDisponible() + ";" +
+                v.getTarifaBase();
     }
 }
