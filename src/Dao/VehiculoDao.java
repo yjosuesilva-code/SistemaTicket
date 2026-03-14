@@ -176,4 +176,12 @@ public class VehiculoDao {
             return null;
         }
     }
+
+    @Override
+    public String toString() {
+        return "VehiculoDAO{" +
+                "archivo='" + RUTA_ARCHIVO + '\'' +
+                ", totalVehiculos=" + lista.size() +
+                '}';
+    }
 }
