@@ -62,4 +62,15 @@ public class VehiculoDao {
         }
         return null;
     }
+
+    public boolean actualizar(Vehiculo vehiculoActualizado) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getPlaca().equalsIgnoreCase(vehiculoActualizado.getPlaca())) {
+                lista.set(i, vehiculoActualizado);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
 }
