@@ -22,4 +22,12 @@ public class Bus extends Vehiculo {
         System.out.printf( "║  Tarifa base    : $%-17.0f  ║%n", getTarifaBase());
         System.out.println("╚══════════════════════════════════════╝");
     }
+
+    @Override
+    public String toString() {
+        return "Bus{"+ super.toString() +
+                "CAPACIDAD_MAX=" + CAPACIDAD_MAX +
+                ", TARIFA_BASE=" + TARIFA_BASE +
+                "} ";
+    }
 }
