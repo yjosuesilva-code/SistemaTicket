@@ -25,5 +25,11 @@ public abstract class Persona {
     }
 
     public abstract void imprimirDetalle();
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "cedula='" + cedula + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
 
 }
