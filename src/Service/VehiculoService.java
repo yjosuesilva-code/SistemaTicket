@@ -116,4 +116,19 @@ public class VehiculoService {
     public int contarDisponibles() {
         return listarDisponibles().size();
     }
+
+    public String vehiculoConMasTickets(java.util.Map<String, Integer> conteoTickets) {
+        if (conteoTickets == null || conteoTickets.isEmpty()) {
+            return "N/A";
+        }
+        String placaMax = null;
+        int    max      = -1;
+        for (java.util.Map.Entry<String, Integer> entry : conteoTickets.entrySet()) {
+            if (entry.getValue() > max) {
+                max      = entry.getValue();
+                placaMax = entry.getKey();
+            }
+        }
+        return placaMax != null ? placaMax : "N/A";
+    }
 }
