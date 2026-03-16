@@ -15,4 +15,10 @@ public class ConductorDao {
         lista = new ArrayList<>();
         cargarTodos();
     }
+
+    public void guardar(Conductor c) {
+        lista.add(c);
+        escribirLinea(c);
+    }
+
 }
