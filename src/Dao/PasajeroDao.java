@@ -89,4 +89,14 @@ public class PasajeroDao {
         return false;
     }
 
+    public boolean eliminar(String cedula) {
+        Pasajero encontrado = buscarPorCedula(cedula);
+        if (encontrado != null) {
+            lista.remove(encontrado);
+            escribirArchivo();
+            return true;
+        }
+        return false;
+    }
+
 }
