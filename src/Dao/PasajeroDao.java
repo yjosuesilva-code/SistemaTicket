@@ -125,4 +125,11 @@ public class PasajeroDao {
         }
     }
 
+    private String aLinea(Pasajero p) {
+        return p.getCedula() + ";" +
+                p.getNombre() + ";" +
+                p.getTipoPasajero();
+    }
+
+
 }
