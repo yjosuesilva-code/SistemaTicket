@@ -100,4 +100,54 @@ public class ConductorDao {
         return false;
     }
 
+    private void escribirLinea(Conductor c) {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+            bw.write(aLinea(c));
+            bw.newLine();
+        } catch (IOException e) {
+            System.err.println("[ConductorDAO] Error al escribir línea: " + e.getMessage());
+        }
+    }
+
+    private void escribirArchivo() {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {
+            for (Conductor c : lista) {
+                bw.write(aLinea(c));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("[ConductorDAO] Error al reescribir archivo: " + e.getMessage());
+        }
+    }
+
+    private String aLinea(Conductor c) {
+        return c.getCedula() + ";" +
+                c.getNombre() + ";" +
+                c.getNumLicencia() + ";" +
+                c.getCateLicencia();
+    }
+
+    private Conductor parsearLinea(String linea) {
+        String[] partes = linea.split(";");
+
+        if (partes.length != CAMPOS) {
+            System.err.println("[ConductorDAO] Línea con formato incorrecto ("
+                    + partes.length + " campos): " + linea);
+            return null;
+        }
+
+        String cedula = partes[0].trim();
+        String nombre = partes[1].trim();
+        String numLicencia = partes[2].trim();
+        String categoriaLicencia = partes[3].trim();
+
+        return new Conductor(cedula, nombre, numLicencia, categoriaLicencia);
+    }
+
 }
