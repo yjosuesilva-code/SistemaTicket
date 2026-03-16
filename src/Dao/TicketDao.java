@@ -106,4 +106,15 @@ public class TicketDao {
         return false;
     }
 
+    public boolean eliminar(Ticket t) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (mismoTicket(lista.get(i), t)) {
+                lista.remove(i);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
