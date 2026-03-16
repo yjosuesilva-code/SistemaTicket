@@ -136,4 +136,19 @@ public class TicketDao {
             System.err.println("[TicketDAO] Error al escribir línea: " + e.getMessage());
         }
     }
+
+    private void escribirArchivo() {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {
+            for (Ticket t : lista) {
+                bw.write(aLinea(t));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("[TicketDAO] Error al reescribir archivo: " + e.getMessage());
+        }
+    }
+
 }
