@@ -64,4 +64,13 @@ public class TicketDao {
         return new ArrayList<>(lista);
     }
 
+    public List<Ticket> buscarPorPasajero(String cedula) {
+        List<Ticket> resultado = new ArrayList<>();
+        for (Ticket t : lista) {
+            if (t.getPasajero().getCedula().equalsIgnoreCase(cedula.trim())) {
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
 }
