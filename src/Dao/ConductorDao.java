@@ -51,4 +51,32 @@ public class ConductorDao {
         return new ArrayList<>(lista);
     }
 
+    public Conductor buscarPorCedula(String cedula) {
+        for (Conductor c : lista) {
+            if (c.getCedula().equalsIgnoreCase(cedula.trim())) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Conductor buscarPorLicencia(String numLicencia) {
+        for (Conductor c : lista) {
+            if (c.getNumLicencia().equalsIgnoreCase(numLicencia.trim())) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public List<Conductor> listarPorCategoria(String categoria) {
+        List<Conductor> resultado = new ArrayList<>();
+        for (Conductor c : lista) {
+            if (c.getCateLicencia().equalsIgnoreCase(categoria.trim())) {
+                resultado.add(c);
+            }
+        }
+        return resultado;
+    }
+
 }
