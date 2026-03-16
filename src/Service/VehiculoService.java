@@ -3,6 +3,7 @@ package Service;
 import Dao.VehiculoDao;
 import Model.Vehiculo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehiculoService {
@@ -30,5 +31,20 @@ public class VehiculoService {
 
     public Vehiculo buscarPorPlaca(String placa) {
         return vehiculoDao.buscarPorPlaca(placa);
+    }
+
+    public boolean placaExiste(String placa) {
+        return vehiculoDao.buscarPorPlaca(placa) != null;
+    }
+
+
+    public List<Vehiculo> listarDisponibles() {
+        List<Vehiculo> disponibles = new ArrayList<>();
+        for (Vehiculo v : vehiculoDao.listarTodos()) {
+            if (v.isDisponible()) {
+                disponibles.add(v);
+            }
+        }
+        return disponibles;
     }
 }
