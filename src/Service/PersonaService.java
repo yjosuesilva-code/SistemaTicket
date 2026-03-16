@@ -85,5 +85,68 @@ public class PersonaService {
         return true;
     }
 
+    public boolean registrarPasajero(Pasajero p) {
+        if (cedulaPasajeroExiste(p.getCedula())) {
+            System.out.println("[PersonaService] Error: ya existe un pasajero con cédula " + p.getCedula());
+            return false;
+        }
+        pasajeroDao.guardar(p);
+        System.out.println("[PersonaService] Pasajero registrado: " + p.getNombre()
+                + " (" + p.getTipoPasajero() + ")");
+        return true;
+    }
+
+    public List<Pasajero> listarPasajeros() {
+        return pasajeroDao.listarTodos();
+    }
+
+    public Pasajero buscarPasajeroPorCedula(String cedula) {
+        return pasajeroDao.buscarPorCedula(cedula);
+    }
+
+    public boolean cedulaPasajeroExiste(String cedula) {
+        return pasajeroDao.buscarPorCedula(cedula) != null;
+    }
+
+    public List<Pasajero> listarPasajerosPorTipo(String tipo) {
+        return pasajeroDao.listarPorTipo(tipo);
+    }
+
+    public boolean actualizarNombrePasajero(String cedula, String nuevoNombre) {
+        Pasajero p = pasajeroDao.buscarPorCedula(cedula);
+        if (p == null) {
+            System.out.println("[PersonaService] Pasajero no encontrado: " + cedula);
+            return false;
+        }
+        p.setNombre(nuevoNombre);
+        pasajeroDao.actualizar(p);
+        return true;
+    }
+
+    public boolean actualizarTipoPasajero(String cedula, String nuevoTipo) {
+        Pasajero p = pasajeroDao.buscarPorCedula(cedula);
+        if (p == null) {
+            System.out.println("[PersonaService] Pasajero no encontrado: " + cedula);
+            return false;
+        }
+        if (!tipoValido(nuevoTipo)) {
+            System.out.println("[PersonaService] Tipo de pasajero inválido: " + nuevoTipo);
+            return false;
+        }
+        p.setTipoPasajero(nuevoTipo.toUpperCase());
+        pasajeroDao.actualizar(p);
+        return true;
+    }
+
+    public boolean eliminarPasajero(String cedula) {
+        if (!cedulaPasajeroExiste(cedula)) {
+            System.out.println("[PersonaService] Pasajero no encontrado: " + cedula);
+            return false;
+        }
+        pasajeroDao.eliminar(cedula);
+        System.out.println("[PersonaService] Pasajero eliminado: " + cedula);
+        return true;
+    }
+
 
 }
