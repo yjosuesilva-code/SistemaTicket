@@ -172,7 +172,6 @@ public class PersonaService {
                         tipo.equalsIgnoreCase("ADULTO_MAYOR")
         );
     }
-
     @Override
     public String toString() {
         return "PersonaService{" +
@@ -180,6 +179,4 @@ public class PersonaService {
                 ", pasajeros=" + pasajeroDao.listarTodos().size() +
                 '}';
     }
-
-
 }
