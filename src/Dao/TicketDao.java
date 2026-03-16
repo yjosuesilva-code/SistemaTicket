@@ -151,4 +151,22 @@ public class TicketDao {
         }
     }
 
+    private String aLinea(Ticket t) {
+        String tipoVehiculo;
+        if (t.getVehiculo() instanceof Buseta) tipoVehiculo = "BUSETA";
+        else if (t.getVehiculo() instanceof MicroBus) tipoVehiculo = "MICROBUS";
+        else tipoVehiculo = "BUS";
+
+        return t.getPasajero().getCedula() + ";" +
+                t.getPasajero().getNombre() + ";" +
+                t.getPasajero().getTipoPasajero() + ";" +
+                t.getVehiculo().getPlaca() + ";" +
+                tipoVehiculo + ";" +
+                t.getVehiculo().getRuta() + ";" +
+                t.getVehiculo().getTarifaBase() + ";" +
+                t.getFechaCompra().toString() + ";" +
+                t.getOrigen() + ";" +
+                t.getDestino() + ";" +
+                t.getValorFinal();
+    }
 }
