@@ -101,4 +101,19 @@ public class VehiculoService {
                 + " asignado al vehículo " + placa);
         return true;
     }
+
+    public boolean eliminarVehiculo(String placa) {
+        if (!placaExiste(placa)) {
+            System.out.println("[VehiculoService] Vehículo no encontrado: " + placa);
+            return false;
+        }
+        vehiculoDao.eliminar(placa);
+        System.out.println("[VehiculoService] Vehículo eliminado: " + placa);
+        return true;
+    }
+
+
+    public int contarDisponibles() {
+        return listarDisponibles().size();
+    }
 }
