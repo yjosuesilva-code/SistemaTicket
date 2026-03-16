@@ -94,4 +94,16 @@ public class TicketDao {
         return resultado;
     }
 
+    public boolean actualizar(Ticket ticketActualizado) {
+        for (int i = 0; i < lista.size(); i++) {
+            Ticket t = lista.get(i);
+            if (mismoTicket(t, ticketActualizado)) {
+                lista.set(i, ticketActualizado);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
