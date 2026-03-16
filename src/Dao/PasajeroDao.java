@@ -156,4 +156,11 @@ public class PasajeroDao {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PasajeroDAO{" +
+                "archivo='" + RUTA_ARCHIVO + '\'' +
+                ", totalPasajeros=" + lista.size() +
+                '}';
+    }
 }
