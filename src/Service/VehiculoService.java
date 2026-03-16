@@ -83,4 +83,22 @@ public class VehiculoService {
                 + " cambiada a: " + (estado ? "disponible" : "no disponible"));
         return true;
     }
+
+    public boolean asignarConductor(String placa, Conductor conductor) {
+        if (!conductor.tieneLicencia()) {
+            System.out.println("[VehiculoService] Error: el conductor "
+                    + conductor.getNombre() + " no tiene licencia registrada.");
+            return false;
+        }
+        Vehiculo v = vehiculoDao.buscarPorPlaca(placa);
+        if (v == null) {
+            System.out.println("[VehiculoService] Vehículo no encontrado: " + placa);
+            return false;
+        }
+        v.setDisponible(true);
+        vehiculoDao.actualizar(v);
+        System.out.println("[VehiculoService] Conductor " + conductor.getNombre()
+                + " asignado al vehículo " + placa);
+        return true;
+    }
 }
