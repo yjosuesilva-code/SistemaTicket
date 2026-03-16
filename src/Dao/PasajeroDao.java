@@ -99,4 +99,18 @@ public class PasajeroDao {
         return false;
     }
 
+    private void escribirLinea(Pasajero p) {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+            bw.write(aLinea(p));
+            bw.newLine();
+        } catch (IOException e) {
+            System.err.println("[PasajeroDAO] Error al escribir línea: " + e.getMessage());
+        }
+    }
+
+
+
 }
