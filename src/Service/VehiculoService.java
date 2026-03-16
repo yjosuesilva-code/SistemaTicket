@@ -70,4 +70,17 @@ public class VehiculoService {
         System.out.println("[VehiculoService] Ruta actualizada para: " + placa);
         return true;
     }
+
+    public boolean cambiarDisponibilidad(String placa, boolean estado) {
+        Vehiculo v = vehiculoDao.buscarPorPlaca(placa);
+        if (v == null) {
+            System.out.println("[VehiculoService] Vehículo no encontrado: " + placa);
+            return false;
+        }
+        v.setDisponible(estado);
+        vehiculoDao.actualizar(v);
+        System.out.println("[VehiculoService] Disponibilidad de " + placa
+                + " cambiada a: " + (estado ? "disponible" : "no disponible"));
+        return true;
+    }
 }
