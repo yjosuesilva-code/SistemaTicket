@@ -68,4 +68,14 @@ public class PasajeroDao {
         return null;
     }
 
+    public List<Pasajero> listarPorTipo(String tipo) {
+        List<Pasajero> resultado = new ArrayList<>();
+        for (Pasajero p : lista) {
+            if (p.getTipoPasajero().equalsIgnoreCase(tipo.trim())) {
+                resultado.add(p);
+            }
+        }
+        return resultado;
+    }
+
 }
