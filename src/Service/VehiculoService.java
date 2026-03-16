@@ -131,4 +131,11 @@ public class VehiculoService {
         }
         return placaMax != null ? placaMax : "N/A";
     }
+
+    @Override
+    public String toString() {
+        return "VehiculoService{" +
+                "totalVehiculos=" + vehiculoDao.listarTodos().size() +
+                '}';
+    }
 }
