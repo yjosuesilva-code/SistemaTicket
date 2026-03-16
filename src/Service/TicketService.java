@@ -87,4 +87,40 @@ public class TicketService {
         return ticketDao.buscarPorFecha(fecha);
     }
 
+    public boolean actualizarDestino(Ticket t, String nuevoDestino) {
+        if (t == null) {
+            System.out.println("[TicketService] Error: ticket nulo.");
+            return false;
+        }
+        t.setDestino(nuevoDestino);
+        boolean resultado = ticketDao.actualizar(t);
+        if (resultado) {
+            System.out.println("[TicketService] Destino actualizado a: " + nuevoDestino);
+        }
+        return resultado;
+    }
+
+    public boolean cancelarTicket(Ticket t) {
+        if (t == null) {
+            System.out.println("[TicketService] Error: ticket nulo.");
+            return false;
+        }
+
+        boolean eliminado = ticketDao.eliminar(t);
+
+        if (eliminado) {
+            Vehiculo v = vehiculoDao.buscarPorPlaca(t.getVehiculo().getPlaca());
+            if (v != null && v.getContadorPasajeros() > 0) {
+                v.setContadorPasajeros(v.getContadorPasajeros() - 1);
+                v.setDisponible(true);
+                vehiculoDao.actualizar(v);
+            }
+            System.out.println("[TicketService] Ticket cancelado. Cupo devuelto al vehículo "
+                    + t.getVehiculo().getPlaca());
+        }
+
+        return eliminado;
+    }
+
+
 }
