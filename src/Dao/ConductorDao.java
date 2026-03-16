@@ -79,4 +79,25 @@ public class ConductorDao {
         return resultado;
     }
 
+    public boolean actualizar(Conductor conductorActualizado) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getCedula().equalsIgnoreCase(conductorActualizado.getCedula())) {
+                lista.set(i, conductorActualizado);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminar(String cedula) {
+        Conductor encontrado = buscarPorCedula(cedula);
+        if (encontrado != null) {
+            lista.remove(encontrado);
+            escribirArchivo();
+            return true;
+        }
+        return false;
+    }
+
 }
