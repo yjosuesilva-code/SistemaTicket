@@ -237,6 +237,15 @@ public class TicketDao {
             System.err.println("[TicketDAO] Error al parsear línea: " + linea + " → " + e.getMessage());
             return null;
         }
+
+        @Override
+        public String toString() {
+            return "TicketDAO{" +
+                    "archivo='" + RUTA_ARCHIVO + '\'' +
+                    ", totalTickets=" + lista.size() +
+                    '}';
+        }
+
     }
 
 }
