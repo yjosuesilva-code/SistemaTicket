@@ -238,14 +238,14 @@ public class TicketDao {
             return null;
         }
 
-        @Override
-        public String toString() {
-            return "TicketDAO{" +
-                    "archivo='" + RUTA_ARCHIVO + '\'' +
-                    ", totalTickets=" + lista.size() +
-                    '}';
-        }
+    }
 
+    @Override
+    public String toString() {
+        return "TicketDAO{" +
+                "archivo='" + RUTA_ARCHIVO + '\'' +
+                ", totalTickets=" + lista.size() +
+                '}';
     }
 
 }
