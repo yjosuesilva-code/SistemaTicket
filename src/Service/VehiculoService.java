@@ -3,6 +3,8 @@ package Service;
 import Dao.VehiculoDao;
 import Model.Vehiculo;
 
+import java.util.List;
+
 public class VehiculoService {
 
     private VehiculoDao vehiculoDao;
@@ -19,5 +21,14 @@ public class VehiculoService {
         System.out.println("[VehiculoService] Vehículo registrado: " + v.getPlaca()
                 + " | Ruta: " + v.getRuta());
         return true;
+    }
+
+    public List<Vehiculo> listarVehiculos() {
+        return vehiculoDao.listarTodos();
+    }
+
+
+    public Vehiculo buscarPorPlaca(String placa) {
+        return vehiculoDao.buscarPorPlaca(placa);
     }
 }
