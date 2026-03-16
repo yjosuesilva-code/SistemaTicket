@@ -34,4 +34,34 @@ public class TicketDao {
         escribirLinea(t);
     }
 
+    public List<Ticket> cargarTodos() {
+        lista.clear();
+        File archivo = new File(RUTA_ARCHIVO);
+
+        if (!archivo.exists()) {
+            return lista;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                linea = linea.trim();
+                if (!linea.isEmpty()) {
+                    Ticket t = parsearLinea(linea);
+                    if (t != null) {
+                        lista.add(t);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("[TicketDAO] Error al leer el archivo: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public List<Ticket> listarTodos() {
+        return new ArrayList<>(lista);
+    }
+
 }
