@@ -29,5 +29,34 @@ public class PasajeroDao {
         escribirLinea(p);
     }
 
+    public List<Pasajero> cargarTodos() {
+        lista.clear();
+        File archivo = new File(RUTA_ARCHIVO);
+
+        if (!archivo.exists()) {
+            return lista;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                linea = linea.trim();
+                if (!linea.isEmpty()) {
+                    Pasajero p = parsearLinea(linea);
+                    if (p != null) {
+                        lista.add(p);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("[PasajeroDAO] Error al leer el archivo: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public List<Pasajero> listarTodos() {
+        return new ArrayList<>(lista);
+    }
 
 }
