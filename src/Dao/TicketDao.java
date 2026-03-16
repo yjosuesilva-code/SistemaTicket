@@ -73,4 +73,14 @@ public class TicketDao {
         }
         return resultado;
     }
+
+    public List<Ticket> buscarPorVehiculo(String placa) {
+        List<Ticket> resultado = new ArrayList<>();
+        for (Ticket t : lista) {
+            if (t.getVehiculo().getPlaca().equalsIgnoreCase(placa.trim())) {
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
 }
