@@ -117,4 +117,12 @@ public class TicketDao {
         return false;
     }
 
+    private boolean mismoTicket(Ticket a, Ticket b) {
+        return a.getPasajero().getCedula().equalsIgnoreCase(b.getPasajero().getCedula())
+                && a.getVehiculo().getPlaca().equalsIgnoreCase(b.getVehiculo().getPlaca())
+                && a.getFechaCompra().equals(b.getFechaCompra())
+                && a.getOrigen().equalsIgnoreCase(b.getOrigen())
+                && a.getDestino().equalsIgnoreCase(b.getDestino());
+    }
+
 }
