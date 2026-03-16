@@ -125,4 +125,15 @@ public class TicketDao {
                 && a.getDestino().equalsIgnoreCase(b.getDestino());
     }
 
+    private void escribirLinea(Ticket t) {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+            bw.write(aLinea(t));
+            bw.newLine();
+        } catch (IOException e) {
+            System.err.println("[TicketDAO] Error al escribir línea: " + e.getMessage());
+        }
+    }
 }
