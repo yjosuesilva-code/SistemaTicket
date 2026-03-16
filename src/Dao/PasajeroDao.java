@@ -1,6 +1,13 @@
 package Dao;
 
+import Model.Pasajero;
+import Model.PasajeroRegular;
+import Model.PasajeroEstudiante;
+import Model.PasajeroAdultoMayor;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PasajeroDao {
 
@@ -16,4 +23,11 @@ public class PasajeroDao {
         lista = new ArrayList<>();
         cargarTodos();
     }
+
+    public void guardar(Pasajero p) {
+        lista.add(p);
+        escribirLinea(p);
+    }
+
+
 }
