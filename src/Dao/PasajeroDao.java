@@ -59,4 +59,13 @@ public class PasajeroDao {
         return new ArrayList<>(lista);
     }
 
+    public Pasajero buscarPorCedula(String cedula) {
+        for (Pasajero p : lista) {
+            if (p.getCedula().equalsIgnoreCase(cedula.trim())) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 }
