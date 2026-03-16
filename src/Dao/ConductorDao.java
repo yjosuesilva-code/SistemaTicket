@@ -150,4 +150,12 @@ public class ConductorDao {
         return new Conductor(cedula, nombre, numLicencia, categoriaLicencia);
     }
 
+    @Override
+    public String toString() {
+        return "ConductorDAO{" +
+                "archivo='" + RUTA_ARCHIVO + '\'' +
+                ", totalConductores=" + lista.size() +
+                '}';
+    }
+
 }
