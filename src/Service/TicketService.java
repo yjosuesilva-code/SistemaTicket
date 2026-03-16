@@ -122,5 +122,82 @@ public class TicketService {
         return eliminado;
     }
 
+    public double totalRecaudado() {
+        double total = 0;
+        for (Ticket t : ticketDao.listarTodos()) {
+            total += t.getValorFinal();
+        }
+        return total;
+    }
+
+    public Map<String, Integer> pasajerosPorTipo() {
+        Map<String, Integer> conteo = new HashMap<>();
+        conteo.put("REGULAR", 0);
+        conteo.put("ESTUDIANTE", 0);
+        conteo.put("ADULTO_MAYOR", 0);
+
+        for (Ticket t : ticketDao.listarTodos()) {
+            String tipo = t.getPasajero().getTipoPasajero().toUpperCase();
+            conteo.put(tipo, conteo.getOrDefault(tipo, 0) + 1);
+        }
+        return conteo;
+    }
+
+    public String vehiculoConMasTickets() {
+        Map<String, Integer> conteo = new HashMap<>();
+
+        for (Ticket t : ticketDao.listarTodos()) {
+            String placa = t.getVehiculo().getPlaca();
+            conteo.put(placa, conteo.getOrDefault(placa, 0) + 1);
+        }
+
+        if (conteo.isEmpty()) return "N/A";
+
+        String placaMax = null;
+        int max = -1;
+
+        for (Map.Entry<String, Integer> entry : conteo.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                placaMax = entry.getKey();
+            }
+        }
+
+        return placaMax != null ? placaMax : "N/A";
+    }
+
+    public double totalRecaudadoPorVehiculo(String placa) {
+        double total = 0;
+        for (Ticket t : ticketDao.buscarPorVehiculo(placa)) {
+            total += t.getValorFinal();
+        }
+        return total;
+    }
+
+    public void mostrarEstadisticas() {
+        System.out.println("╔══════════════════════════════════════════╗");
+        System.out.println("║         ESTADÍSTICAS DEL SISTEMA         ║");
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.printf("║  Total tickets vendidos : %-14d  ║%n", listarTickets().size());
+        System.out.printf("║  Total recaudado        : $%-13.0f  ║%n", totalRecaudado());
+        System.out.println("╠══════════════════════════════════════════╣");
+
+        Map<String, Integer> porTipo = pasajerosPorTipo();
+        System.out.printf("║  Pasajeros regulares    : %-14d  ║%n", porTipo.get("REGULAR"));
+        System.out.printf("║  Pasajeros estudiantes  : %-14d  ║%n", porTipo.get("ESTUDIANTE"));
+        System.out.printf("║  Pasajeros adulto mayor : %-14d  ║%n", porTipo.get("ADULTO_MAYOR"));
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.printf("║  Vehículo más tickets   : %-14s  ║%n", vehiculoConMasTickets());
+        System.out.println("╚══════════════════════════════════════════╝");
+    }
+
+    @Override
+    public String toString() {
+        return "TicketService{" +
+                "totalTickets=" + ticketDao.listarTodos().size() +
+                ", totalRecaudado=" + totalRecaudado() +
+                '}';
+    }
+
 
 }
