@@ -71,4 +71,20 @@ public class TicketService {
         return ticket;
     }
 
+    public List<Ticket> listarTickets() {
+        return ticketDao.listarTodos();
+    }
+
+    public List<Ticket> buscarTicketsPorPasajero(String cedula) {
+        return ticketDao.buscarPorPasajero(cedula);
+    }
+
+    public List<Ticket> buscarTicketsPorVehiculo(String placa) {
+        return ticketDao.buscarPorVehiculo(placa);
+    }
+
+    public List<Ticket> buscarTicketsPorFecha(LocalDate fecha) {
+        return ticketDao.buscarPorFecha(fecha);
+    }
+
 }
