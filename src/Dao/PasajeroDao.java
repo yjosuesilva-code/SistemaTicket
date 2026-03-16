@@ -78,4 +78,15 @@ public class PasajeroDao {
         return resultado;
     }
 
+    public boolean actualizar(Pasajero pasajeroActualizado) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getCedula().equalsIgnoreCase(pasajeroActualizado.getCedula())) {
+                lista.set(i, pasajeroActualizado);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
