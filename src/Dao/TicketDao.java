@@ -169,4 +169,74 @@ public class TicketDao {
                 t.getDestino() + ";" +
                 t.getValorFinal();
     }
+
+    private Ticket parsearLinea(String linea) {
+        String[] p = linea.split(";");
+
+        if (p.length != CAMPOS) {
+            System.err.println("[TicketDAO] Línea con formato incorrecto (" + p.length + " campos): " + linea);
+            return null;
+        }
+
+        try {
+            String cedula       = p[0].trim();
+            String nombre       = p[1].trim();
+            String tipoPasajero = p[2].trim().toUpperCase();
+
+            Pasajero pasajero;
+            switch (tipoPasajero) {
+                case "REGULAR":
+                    pasajero = new PasajeroRegular(cedula, nombre);
+                    break;
+                case "ESTUDIANTE":
+                    pasajero = new PasajeroEstudiante(cedula, nombre);
+                    break;
+                case "ADULTO_MAYOR":
+                    pasajero = new PasajeroAdultoMayor(cedula, nombre);
+                    break;
+                default:
+                    System.err.println("[TicketDAO] Tipo de pasajero desconocido: " + tipoPasajero);
+                    return null;
+            }
+
+
+            String placa        = p[3].trim();
+            String tipoVehiculo = p[4].trim().toUpperCase();
+            String ruta         = p[5].trim();
+            double tarifaBase   = Double.parseDouble(p[6].trim());
+
+            Vehiculo vehiculo;
+            switch (tipoVehiculo) {
+                case "BUSETA":
+                    vehiculo = new Buseta(placa, ruta);
+                    break;
+                case "MICROBUS":
+                    vehiculo = new MicroBus(placa, ruta);
+                    break;
+                case "BUS":
+                    vehiculo = new Bus(placa, ruta);
+                    break;
+                default:
+                    System.err.println("[TicketDAO] Tipo de vehículo desconocido: " + tipoVehiculo);
+                    return null;
+            }
+            vehiculo.setTarifaBase(tarifaBase);
+
+            LocalDate fecha      = LocalDate.parse(p[7].trim());
+            String    origen     = p[8].trim();
+            String    destino    = p[9].trim();
+            double    valorFinal = Double.parseDouble(p[10].trim());
+
+            Ticket ticket = new Ticket(pasajero, vehiculo, origen, destino);
+            ticket.setValorFinal(valorFinal);
+
+
+            return ticket;
+
+        } catch (Exception e) {
+            System.err.println("[TicketDAO] Error al parsear línea: " + linea + " → " + e.getMessage());
+            return null;
+        }
+    }
+
 }
