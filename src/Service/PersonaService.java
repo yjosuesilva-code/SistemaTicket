@@ -47,4 +47,43 @@ public class PersonaService {
     public List<Conductor> listarConductoresPorCategoria(String categoria) {
         return conductorDao.listarPorCategoria(categoria);
     }
+
+    public boolean actualizarNombreConductor(String cedula, String nuevoNombre) {
+        Conductor c = conductorDao.buscarPorCedula(cedula);
+        if (c == null) {
+            System.out.println("[PersonaService] Conductor no encontrado: " + cedula);
+            return false;
+        }
+        c.setNombre(nuevoNombre);
+        conductorDao.actualizar(c);
+        return true;
+    }
+
+    public boolean actualizarLicencia(String cedula, String numLicencia, String categoria) {
+        Conductor c = conductorDao.buscarPorCedula(cedula);
+        if (c == null) {
+            System.out.println("[PersonaService] Conductor no encontrado: " + cedula);
+            return false;
+        }
+        if (numLicencia == null || numLicencia.trim().isEmpty()) {
+            System.out.println("[PersonaService] Error: el número de licencia no puede estar vacío.");
+            return false;
+        }
+        c.setNumLicencia(numLicencia);
+        c.setCateLicencia(categoria);
+        conductorDao.actualizar(c);
+        return true;
+    }
+
+    public boolean eliminarConductor(String cedula) {
+        if (!cedulaConductorExiste(cedula)) {
+            System.out.println("[PersonaService] Conductor no encontrado: " + cedula);
+            return false;
+        }
+        conductorDao.eliminar(cedula);
+        System.out.println("[PersonaService] Conductor eliminado: " + cedula);
+        return true;
+    }
+
+
 }
