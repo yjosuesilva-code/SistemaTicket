@@ -83,4 +83,15 @@ public class TicketDao {
         }
         return resultado;
     }
+
+    public List<Ticket> buscarPorFecha(LocalDate fecha) {
+        List<Ticket> resultado = new ArrayList<>();
+        for (Ticket t : lista) {
+            if (t.getFechaCompra().equals(fecha)) {
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
+
 }
