@@ -47,4 +47,27 @@ public class VehiculoService {
         }
         return disponibles;
     }
+
+    public List<Vehiculo> listarConCupos() {
+        List<Vehiculo> conCupos = new ArrayList<>();
+        for (Vehiculo v : vehiculoDao.listarTodos()) {
+            if (v.hayCapacidad()) {
+                conCupos.add(v);
+            }
+        }
+        return conCupos;
+    }
+
+
+    public boolean actualizarRuta(String placa, String nuevaRuta) {
+        Vehiculo v = vehiculoDao.buscarPorPlaca(placa);
+        if (v == null) {
+            System.out.println("[VehiculoService] Vehículo no encontrado: " + placa);
+            return false;
+        }
+        v.setRuta(nuevaRuta);
+        vehiculoDao.actualizar(v);
+        System.out.println("[VehiculoService] Ruta actualizada para: " + placa);
+        return true;
+    }
 }
