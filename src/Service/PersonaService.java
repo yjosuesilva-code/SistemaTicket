@@ -148,5 +148,38 @@ public class PersonaService {
         return true;
     }
 
+    public Map<String, Integer> contarPasajerosPorTipo() {
+        Map<String, Integer> conteo = new HashMap<>();
+        conteo.put("REGULAR",      pasajeroDao.listarPorTipo("REGULAR").size());
+        conteo.put("ESTUDIANTE",   pasajeroDao.listarPorTipo("ESTUDIANTE").size());
+        conteo.put("ADULTO_MAYOR", pasajeroDao.listarPorTipo("ADULTO_MAYOR").size());
+        return conteo;
+    }
+
+    public double calcularDescuentoPasajero(String cedula) {
+        Pasajero p = pasajeroDao.buscarPorCedula(cedula);
+        if (p == null) {
+            System.out.println("[PersonaService] Pasajero no encontrado: " + cedula);
+            return -1;
+        }
+        return p.calcularDescuento();
+    }
+
+    private boolean tipoValido(String tipo) {
+        return tipo != null && (
+                tipo.equalsIgnoreCase("REGULAR") ||
+                        tipo.equalsIgnoreCase("ESTUDIANTE") ||
+                        tipo.equalsIgnoreCase("ADULTO_MAYOR")
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "PersonaService{" +
+                "conductores=" + conductorDao.listarTodos().size() +
+                ", pasajeros=" + pasajeroDao.listarTodos().size() +
+                '}';
+    }
+
 
 }
