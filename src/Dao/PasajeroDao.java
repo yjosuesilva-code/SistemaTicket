@@ -131,5 +131,29 @@ public class PasajeroDao {
                 p.getTipoPasajero();
     }
 
+    private Pasajero parsearLinea(String linea) {
+        String[] partes = linea.split(";");
+
+        if (partes.length != 3) {
+            System.err.println("[PasajeroDAO] Línea con formato incorrecto: " + linea);
+            return null;
+        }
+
+        String cedula = partes[0].trim();
+        String nombre = partes[1].trim();
+        String tipo   = partes[2].trim().toUpperCase();
+
+        switch (tipo) {
+            case "REGULAR":
+                return new PasajeroRegular(cedula, nombre);
+            case "ESTUDIANTE":
+                return new PasajeroEstudiante(cedula, nombre);
+            case "ADULTO_MAYOR":
+                return new PasajeroAdultoMayor(cedula, nombre);
+            default:
+                System.err.println("[PasajeroDAO] Tipo de pasajero desconocido: " + tipo);
+                return null;
+        }
+    }
 
 }
