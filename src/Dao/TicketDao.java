@@ -27,4 +27,11 @@ public class TicketDao {
         lista = new ArrayList<>();
         cargarTodos();
     }
+
+
+    public void guardar(Ticket t) {
+        lista.add(t);
+        escribirLinea(t);
+    }
+
 }
