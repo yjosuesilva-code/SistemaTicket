@@ -144,4 +144,13 @@ public class VehiculoView {
         boolean ok = vehiculoService.actualizarRuta(placa, nuevaRuta);
         System.out.println(ok ? "  Ruta actualizada." : "   Vehículo no encontrado.");
     }
+    private void cambiarDisponibilidad() {
+        System.out.print("\n  Placa del vehículo: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        System.out.print("  ¿Disponible? (1=Sí / 0=No): ");
+        int op = leerEntero();
+        boolean estado = (op == 1);
+        boolean ok = vehiculoService.cambiarDisponibilidad(placa, estado);
+        System.out.println(ok ? "  ✔ Disponibilidad actualizada." : "  ✘ Vehículo no encontrado.");
+    }
 }
