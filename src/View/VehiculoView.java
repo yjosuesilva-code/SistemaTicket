@@ -6,6 +6,7 @@ import Model.MicroBus;
 import Model.Vehiculo;
 import Service.VehiculoService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class VehiculoView {
@@ -95,6 +96,30 @@ public class VehiculoView {
             System.out.println("  ✔ Vehículo registrado exitosamente.");
         } else {
             System.out.println("  ✘ No se pudo registrar el vehículo.");
+        }
+    }
+
+    private void listarVehiculos() {
+        List<Vehiculo> lista = vehiculoService.listarVehiculos();
+        System.out.println("\n── Lista de Vehículos (" + lista.size() + ") ──────────────");
+        if (lista.isEmpty()) {
+            System.out.println("  No hay vehículos registrados.");
+            return;
+        }
+        for (Vehiculo v : lista) {
+            v.imprimirDetalle();
+        }
+    }
+
+
+    private void buscarPorPlaca() {
+        System.out.print("\n  Ingrese la placa: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        Vehiculo v = vehiculoService.buscarPorPlaca(placa);
+        if (v == null) {
+            System.out.println("  ✘ No se encontró ningún vehículo con placa: " + placa);
+        } else {
+            v.imprimirDetalle();
         }
     }
 }
