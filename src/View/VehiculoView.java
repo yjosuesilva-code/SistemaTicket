@@ -169,4 +169,17 @@ public class VehiculoView {
         boolean ok = vehiculoService.asignarConductor(placa, conductor);
         System.out.println(ok ? "   Conductor asignado correctamente." : "   No se pudo asignar el conductor.");
     }
+
+    private void eliminarVehiculo() {
+        System.out.print("\n  Placa del vehículo a eliminar: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        System.out.print("  ¿Confirma eliminar el vehículo " + placa + "? (1=Sí / 0=No): ");
+        int confirm = leerEntero();
+        if (confirm != 1) {
+            System.out.println("  Operación cancelada.");
+            return;
+        }
+        boolean ok = vehiculoService.eliminarVehiculo(placa);
+        System.out.println(ok ? "   Vehículo eliminado." : "   Vehículo no encontrado.");
+    }
 }
