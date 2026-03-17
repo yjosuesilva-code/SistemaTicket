@@ -93,9 +93,9 @@ public class VehiculoView {
 
         boolean resultado = vehiculoService.registrarVehiculo(v);
         if (resultado) {
-            System.out.println("  ✔ Vehículo registrado exitosamente.");
+            System.out.println("   Vehículo registrado exitosamente.");
         } else {
-            System.out.println("  ✘ No se pudo registrar el vehículo.");
+            System.out.println("   No se pudo registrar el vehículo.");
         }
     }
 
@@ -117,7 +117,7 @@ public class VehiculoView {
         String placa = sc.nextLine().trim().toUpperCase();
         Vehiculo v = vehiculoService.buscarPorPlaca(placa);
         if (v == null) {
-            System.out.println("  ✘ No se encontró ningún vehículo con placa: " + placa);
+            System.out.println("   No se encontró ningún vehículo con placa: " + placa);
         } else {
             v.imprimirDetalle();
         }
@@ -151,6 +151,22 @@ public class VehiculoView {
         int op = leerEntero();
         boolean estado = (op == 1);
         boolean ok = vehiculoService.cambiarDisponibilidad(placa, estado);
-        System.out.println(ok ? "  ✔ Disponibilidad actualizada." : "  ✘ Vehículo no encontrado.");
+        System.out.println(ok ? "   Disponibilidad actualizada." : "   Vehículo no encontrado.");
+    }
+
+    private void asignarConductor() {
+        System.out.print("\n  Placa del vehículo: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        System.out.print("  Cédula del conductor: ");
+        String cedula = sc.nextLine().trim();
+
+        Conductor conductor = personaService.buscarConductorPorCedula(cedula);
+        if (conductor == null) {
+            System.out.println("   Conductor no encontrado con cédula: " + cedula);
+            return;
+        }
+
+        boolean ok = vehiculoService.asignarConductor(placa, conductor);
+        System.out.println(ok ? "   Conductor asignado correctamente." : "   No se pudo asignar el conductor.");
     }
 }
