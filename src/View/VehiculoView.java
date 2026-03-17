@@ -122,4 +122,26 @@ public class VehiculoView {
             v.imprimirDetalle();
         }
     }
+
+    private void listarDisponibles() {
+        List<Vehiculo> lista = vehiculoService.listarDisponibles();
+        System.out.println("\n── Vehículos Disponibles (" + lista.size() + ") ────────────");
+        if (lista.isEmpty()) {
+            System.out.println("  No hay vehículos disponibles.");
+            return;
+        }
+        for (Vehiculo v : lista) {
+            v.imprimirDetalle();
+        }
+    }
+
+
+    private void actualizarRuta() {
+        System.out.print("\n  Placa del vehículo: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        System.out.print("  Nueva ruta: ");
+        String nuevaRuta = sc.nextLine().trim();
+        boolean ok = vehiculoService.actualizarRuta(placa, nuevaRuta);
+        System.out.println(ok ? "  Ruta actualizada." : "   Vehículo no encontrado.");
+    }
 }
