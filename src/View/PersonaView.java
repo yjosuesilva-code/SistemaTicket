@@ -305,4 +305,15 @@ public class PersonaView {
         System.out.println(ok ? "  ✔ Pasajero eliminado." : "  ✘ Pasajero no encontrado.");
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // HELPER — leer entero con manejo de error
+    // ─────────────────────────────────────────────────────────────────────────
+    private int leerEntero() {
+        try {
+            return Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
 }
