@@ -140,14 +140,73 @@ public class TicketView {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// 6. CANCELAR TICKET
-// ─────────────────────────────────────────────────────────────────────────
+    // 6. CANCELAR TICKET
+    // ─────────────────────────────────────────────────────────────────────────
     private void cancelarTicket() {
         System.out.println("\n── Cancelar Ticket ─────────────────────");
         System.out.print("  Cédula del pasajero: ");
         String cedula = sc.nextLine().trim();
 
         List<Ticket> tickets = ticketService.buscarTicketsPorPasajero(cedula);
+        if (tickets.isEmpty()) {
+            System.out.println("  ✘ No se encontraron tickets para la cédula: " + cedula);
+            return;
+        }
+
+        // Mostrar tickets del pasajero para que elija
+        System.out.println("  Tickets del pasajero:");
+        for (int i = 0; i < tickets.size(); i++) {
+            Ticket t = tickets.get(i);
+            System.out.printf("  [%d] %s → %s | Vehículo: %s | Fecha: %s | Valor: $%.0f%n",
+                    i + 1,
+                    t.getOrigen(),
+                    t.getDestino(),
+                    t.getVehiculo().getPlaca(),
+                    t.getFechaCompra(),
+                    t.getValorFinal());
+        }
+
+        System.out.print("  Seleccione el número del ticket a cancelar (0 para salir): ");
+        int seleccion = leerEntero();
+
+        if (seleccion == 0) {
+            System.out.println("  Operación cancelada.");
+            return;
+        }
+        if (seleccion < 1 || seleccion > tickets.size()) {
+            System.out.println("  Selección inválida.");
+            return;
+        }
+
+        Ticket ticketACancelar = tickets.get(seleccion - 1);
+        System.out.print("  ¿Confirma cancelar este ticket? (1=Sí / 0=No): ");
+        int confirm = leerEntero();
+        if (confirm != 1) {
+            System.out.println("  Operación cancelada.");
+            return;
+        }
+
+        boolean ok = ticketService.cancelarTicket(ticketACancelar);
+        System.out.println(ok
+                ? "  ✔ Ticket cancelado. El cupo fue devuelto al vehículo."
+                : "  ✘ No se pudo cancelar el ticket.");
     }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 7. ESTADÍSTICAS
+    // ─────────────────────────────────────────────────────────────────────────
+    private void mostrarEstadisticas() {
+        System.out.println();
+        ticketService.mostrarEstadisticas();
+
+        // Desglose por tipo de pasajero
+        Map<String, Integer> porTipo = ticketService.pasajerosPorTipo();
+        System.out.println("\n── Desglose por tipo de pasajero ───────");
+        System.out.printf("  Regular      : %d tickets%n", porTipo.getOrDefault("REGULAR",      0));
+        System.out.printf("  Estudiante   : %d tickets%n", porTipo.getOrDefault("ESTUDIANTE",   0));
+        System.out.printf("  Adulto Mayor : %d tickets%n", porTipo.getOrDefault("ADULTO_MAYOR", 0));
+    }
+
+
 
 }
