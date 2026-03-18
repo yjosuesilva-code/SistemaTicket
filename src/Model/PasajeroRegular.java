@@ -12,7 +12,14 @@ public class PasajeroRegular extends Pasajero{
 
     @Override
     public void imprimirDetalle() {
-
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║       DETALLE – PASAJERO REGULAR     ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.printf( "║  Cédula         : %-18s  ║%n", getCedula());
+        System.out.printf( "║  Nombre         : %-18s  ║%n", getNombre());
+        System.out.printf( "║  Tipo           : %-18s  ║%n", getTipoPasajero());
+        System.out.printf( "║  Descuento      : %-18s  ║%n", "Sin descuento");
+        System.out.println("╚══════════════════════════════════════╝");
     }
 
     @Override
