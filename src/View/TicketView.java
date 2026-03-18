@@ -121,4 +121,22 @@ public class TicketView {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+// 5. BUSCAR POR FECHA
+// ─────────────────────────────────────────────────────────────────────────
+    private void buscarPorFecha() {
+        System.out.print("\n  Fecha (formato yyyy-MM-dd, ej. 2025-03-10): ");
+        String fechaStr = sc.nextLine().trim();
+        try {
+            LocalDate fecha = LocalDate.parse(fechaStr);
+            List<Ticket> lista = ticketService.buscarTicketsPorFecha(fecha);
+            System.out.println("  Tickets encontrados: " + lista.size());
+            for (Ticket t : lista) {
+                t.imprimirDetalle();
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("  ✘ Formato de fecha inválido. Use yyyy-MM-dd.");
+        }
+    }
+
 }
