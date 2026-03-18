@@ -27,11 +27,15 @@ public class VehiculoDao {
 
     public List<Vehiculo> cargarTodos() {
         lista.clear();
-        File archivo = new File(RUTA_ARCHIVO);
+        cargarArchivo(RUTA_BUSETA);
+        cargarArchivo(RUTA_MICROBUS);
+        cargarArchivo(RUTA_BUS);
+        return lista;
+    }
 
-        if (!archivo.exists()) {
-            return lista;
-        }
+    private void cargarArchivo(String ruta) {
+        File archivo = new File(ruta);
+        if (!archivo.exists()) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
@@ -39,16 +43,12 @@ public class VehiculoDao {
                 linea = linea.trim();
                 if (!linea.isEmpty()) {
                     Vehiculo v = parsearLinea(linea);
-                    if (v != null) {
-                        lista.add(v);
-                    }
+                    if (v != null) lista.add(v);
                 }
             }
         } catch (IOException e) {
-            System.err.println("[VehiculoDAO] Error al leer el archivo: " + e.getMessage());
+            System.err.println("[VehiculoDAO] Error al leer " + ruta + ": " + e.getMessage());
         }
-
-        return lista;
     }
 
     public List<Vehiculo> listarTodos() {
