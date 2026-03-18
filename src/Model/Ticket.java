@@ -1,6 +1,6 @@
 package Model;
 
-public class Ticket {
+public class Ticket implements Calculable {
     private Pasajero pasajero;
     private Vehiculo vehiculo;
     private LocalDate fechaCompra;
