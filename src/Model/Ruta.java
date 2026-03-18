@@ -68,5 +68,14 @@ public class Ruta implements Imprimible {
         System.out.println("╚══════════════════════════════════════╝");
     }
 
-
+    @Override
+    public String toString() {
+        return "Ruta{" +
+                "codigo='" + codigo + '\'' +
+                ", ciudadOrigen='" + ciudadOrigen + '\'' +
+                ", ciudadDestino='" + ciudadDestino + '\'' +
+                ", distanciaKm=" + distanciaKm +
+                ", tiempoEstimadoMin=" + tiempoEstimadoMin +
+                '}';
+    }
 }
