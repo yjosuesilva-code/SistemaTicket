@@ -95,4 +95,30 @@ public class TicketView {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+// 3. BUSCAR POR PASAJERO
+// ─────────────────────────────────────────────────────────────────────────
+    private void buscarPorPasajero() {
+        System.out.print("\n  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+        List<Ticket> lista = ticketService.buscarTicketsPorPasajero(cedula);
+        System.out.println("  Tickets encontrados: " + lista.size());
+        for (Ticket t : lista) {
+            t.imprimirDetalle();
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+// 4. BUSCAR POR VEHÍCULO
+// ─────────────────────────────────────────────────────────────────────────
+    private void buscarPorVehiculo() {
+        System.out.print("\n  Placa del vehículo: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        List<Ticket> lista = ticketService.buscarTicketsPorVehiculo(placa);
+        System.out.println("  Tickets encontrados: " + lista.size());
+        for (Ticket t : lista) {
+            t.imprimirDetalle();
+        }
+    }
+
 }
