@@ -161,4 +161,32 @@ public class PersonaView {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // 5. BUSCAR CONDUCTOR
+    // ─────────────────────────────────────────────────────────────────────────
+    private void buscarConductorPorCedula() {
+        System.out.print("\n  Cédula del conductor: ");
+        String cedula = sc.nextLine().trim();
+        Conductor c = personaService.buscarConductorPorCedula(cedula);
+        if (c == null) {
+            System.out.println("  ✘ No se encontró conductor con cédula: " + cedula);
+        } else {
+            c.imprimirDetalle();
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 6. BUSCAR PASAJERO
+    // ─────────────────────────────────────────────────────────────────────────
+    private void buscarPasajeroPorCedula() {
+        System.out.print("\n  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+        Pasajero p = personaService.buscarPasajeroPorCedula(cedula);
+        if (p == null) {
+            System.out.println("  ✘ No se encontró pasajero con cédula: " + cedula);
+        } else {
+            p.imprimirDetalle();
+        }
+    }
+
 }
