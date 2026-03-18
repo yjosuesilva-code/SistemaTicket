@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehiculoDao {
-    private static final String RUTA_ARCHIVO = "data/vehiculos.txt";
+    private static final String RUTA_BUSETA   = "data/buseta.txt";
+    private static final String RUTA_MICROBUS = "data/microbus.txt";
+    private static final String RUTA_BUS      = "data/bus.txt";
     private List<Vehiculo> lista;
 
     public VehiculoDao() {
