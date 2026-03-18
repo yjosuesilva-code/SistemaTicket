@@ -98,18 +98,30 @@ public class VehiculoDao {
             System.err.println("[VehiculoDAO] Error al escribir linea: " + e.getMessage());
         }
     }
+    private String getRuta(Vehiculo v) {
+        if (v instanceof Buseta)   return RUTA_BUSETA;
+        if (v instanceof MicroBus) return RUTA_MICROBUS;
+        return RUTA_BUS;
+    }
 
-    private void escribirArchivo() {
-        File archivo = new File(RUTA_ARCHIVO);
+    private void escribirArchivos() {
+        reescribirArchivo(RUTA_BUSETA,   Buseta.class);
+        reescribirArchivo(RUTA_MICROBUS, MicroBus.class);
+        reescribirArchivo(RUTA_BUS,      Bus.class);
+    }
+    private void reescribirArchivo(String ruta, Class<?> tipo) {
+        File archivo = new File(ruta);
         archivo.getParentFile().mkdirs();
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {
             for (Vehiculo v : lista) {
-                bw.write(aLinea(v));
-                bw.newLine();
+                if (tipo.isInstance(v)) {
+                    bw.write(aLinea(v));
+                    bw.newLine();
+                }
             }
         } catch (IOException e) {
-            System.err.println("[VehiculoDAO] Error al reescribir archivo: " + e.getMessage());
+            System.err.println("[VehiculoDAO] Error al reescribir " + ruta + ": " + e.getMessage());
         }
     }
 
