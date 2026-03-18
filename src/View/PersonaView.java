@@ -100,4 +100,34 @@ public class PersonaView {
         boolean ok = personaService.registrarConductor(c);
         System.out.println(ok ? "  ✔ Conductor registrado exitosamente." : "  ✘ No se pudo registrar el conductor.");
     }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 2. REGISTRAR PASAJERO
+    // ─────────────────────────────────────────────────────────────────────────
+    private void registrarPasajero() {
+        System.out.println("\n── Registrar Pasajero ──────────────────");
+        System.out.print("  Cédula: ");
+        String cedula = sc.nextLine().trim();
+        System.out.print("  Nombre completo: ");
+        String nombre = sc.nextLine().trim();
+        System.out.println("  Tipo de pasajero:");
+        System.out.println("  1. Regular      (sin descuento)");
+        System.out.println("  2. Estudiante   (15% descuento)");
+        System.out.println("  3. Adulto Mayor (30% descuento)");
+        System.out.print("  Seleccione: ");
+        int tipo = leerEntero();
+
+        Pasajero p;
+        switch (tipo) {
+            case 1: p = new PasajeroRegular(cedula, nombre);      break;
+            case 2: p = new PasajeroEstudiante(cedula, nombre);   break;
+            case 3: p = new PasajeroAdultoMayor(cedula, nombre);  break;
+            default:
+                System.out.println("  Tipo inválido.");
+                return;
+        }
+
+        boolean ok = personaService.registrarPasajero(p);
+        System.out.println(ok ? "  ✔ Pasajero registrado exitosamente." : "  ✘ No se pudo registrar el pasajero.");
+    }
 }
