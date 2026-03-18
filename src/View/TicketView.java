@@ -57,6 +57,29 @@ public class TicketView {
         } while (opcion != 0);
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+// 1. VENDER TICKET
+// ─────────────────────────────────────────────────────────────────────────
+    private void venderTicket() {
+        System.out.println("\n── Vender Ticket ───────────────────────");
+        System.out.print("  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+        System.out.print("  Placa del vehículo: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+        System.out.print("  Ciudad de origen: ");
+        String origen = sc.nextLine().trim();
+        System.out.print("  Ciudad de destino: ");
+        String destino = sc.nextLine().trim();
+
+        Ticket ticket = ticketService.venderTicket(cedula, placa, origen, destino);
+        if (ticket != null) {
+            System.out.println("\n  ✔ Ticket generado exitosamente:");
+            ticket.imprimirDetalle();
+        } else {
+            System.out.println("  ✘ No se pudo generar el ticket.");
+        }
+    }
+
 
 
 }
