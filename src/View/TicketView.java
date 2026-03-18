@@ -80,6 +80,19 @@ public class TicketView {
         }
     }
 
-
+    // ─────────────────────────────────────────────────────────────────────────
+// 2. LISTAR TODOS LOS TICKETS
+// ─────────────────────────────────────────────────────────────────────────
+    private void listarTickets() {
+        List<Ticket> lista = ticketService.listarTickets();
+        System.out.println("\n── Todos los Tickets (" + lista.size() + ") ──────────────");
+        if (lista.isEmpty()) {
+            System.out.println("  No hay tickets registrados.");
+            return;
+        }
+        for (Ticket t : lista) {
+            t.imprimirDetalle();
+        }
+    }
 
 }
