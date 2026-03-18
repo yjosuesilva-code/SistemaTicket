@@ -130,4 +130,35 @@ public class PersonaView {
         boolean ok = personaService.registrarPasajero(p);
         System.out.println(ok ? "  ✔ Pasajero registrado exitosamente." : "  ✘ No se pudo registrar el pasajero.");
     }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 3. LISTAR CONDUCTORES
+    // ─────────────────────────────────────────────────────────────────────────
+    private void listarConductores() {
+        List<Conductor> lista = personaService.listarConductores();
+        System.out.println("\n── Conductores registrados (" + lista.size() + ") ──────────");
+        if (lista.isEmpty()) {
+            System.out.println("  No hay conductores registrados.");
+            return;
+        }
+        for (Conductor c : lista) {
+            c.imprimirDetalle();
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 4. LISTAR PASAJEROS
+    // ─────────────────────────────────────────────────────────────────────────
+    private void listarPasajeros() {
+        List<Pasajero> lista = personaService.listarPasajeros();
+        System.out.println("\n── Pasajeros registrados (" + lista.size() + ") ───────────");
+        if (lista.isEmpty()) {
+            System.out.println("  No hay pasajeros registrados.");
+            return;
+        }
+        for (Pasajero p : lista) {
+            p.imprimirDetalle();
+        }
+    }
+
 }
