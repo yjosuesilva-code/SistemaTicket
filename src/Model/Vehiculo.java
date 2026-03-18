@@ -13,8 +13,8 @@ public abstract class Vehiculo {
         this.ruta = ruta;
         this.capacidadMaxima = capacidadMaxima;
         this.contadorPasajeros = contadorPasajeros;
-        this.disponible = true;
-        this.tarifaBase = 0;
+        this.disponible = disponible;
+        this.tarifaBase = tarifaBase;
     }
 
     public String getPlaca() {
