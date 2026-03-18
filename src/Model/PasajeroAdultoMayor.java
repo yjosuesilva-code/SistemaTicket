@@ -11,7 +11,16 @@ public class PasajeroAdultoMayor extends Pasajero{
 
     @Override
     public void imprimirDetalle() {
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║    DETALLE – PASAJERO ADULTO MAYOR   ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.printf( "║  Cédula         : %-18s  ║%n", getCedula());
+        System.out.printf( "║  Nombre         : %-18s  ║%n", getNombre());
+        System.out.printf( "║  Tipo           : %-18s  ║%n", getTipoPasajero());
+        System.out.printf( "║  Descuento      : %-18s  ║%n", "30%");
+        System.out.println("╚══════════════════════════════════════╝");
     }
+
     @Override
     public String toString() {
         return "PasajeroAdultoMayor " + super.toString();
