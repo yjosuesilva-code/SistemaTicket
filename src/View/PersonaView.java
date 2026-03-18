@@ -73,4 +73,31 @@ public class PersonaView {
             }
         } while (opcion != 0);
     }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 1. REGISTRAR CONDUCTOR
+    // ─────────────────────────────────────────────────────────────────────────
+    private void registrarConductor() {
+        System.out.println("\n── Registrar Conductor ─────────────────");
+        System.out.print("  Cédula: ");
+        String cedula = sc.nextLine().trim();
+        System.out.print("  Nombre completo: ");
+        String nombre = sc.nextLine().trim();
+        System.out.print("  Número de licencia: ");
+        String numLicencia = sc.nextLine().trim();
+        System.out.println("  Categoría de licencia:");
+        System.out.println("  1. B1   2. B2   3. C1   4. C2");
+        System.out.print("  Seleccione: ");
+        int catOp = leerEntero();
+        String[] categorias = {"B1", "B2", "C1", "C2"};
+        if (catOp < 1 || catOp > 4) {
+            System.out.println("  Categoría inválida.");
+            return;
+        }
+        String categoria = categorias[catOp - 1];
+
+        Conductor c = new Conductor(cedula, nombre, numLicencia, categoria);
+        boolean ok = personaService.registrarConductor(c);
+        System.out.println(ok ? "  ✔ Conductor registrado exitosamente." : "  ✘ No se pudo registrar el conductor.");
+    }
 }
