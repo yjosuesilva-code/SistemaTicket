@@ -69,7 +69,7 @@ public class VehiculoDao {
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getPlaca().equalsIgnoreCase(vehiculoActualizado.getPlaca())) {
                 lista.set(i, vehiculoActualizado);
-                escribirArchivo();
+                escribirArchivos();
                 return true;
             }
         }
@@ -80,7 +80,7 @@ public class VehiculoDao {
         Vehiculo encontrado = buscarPorPlaca(placa);
         if (encontrado != null) {
             lista.remove(encontrado);
-            escribirArchivo();
+            escribirArchivos();
             return true;
         }
         return false;
@@ -194,9 +194,6 @@ public class VehiculoDao {
 
     @Override
     public String toString() {
-        return "VehiculoDAO{" +
-                "archivo='" + RUTA_ARCHIVO + '\'' +
-                ", totalVehiculos=" + lista.size() +
-                '}';
+        return "VehiculoDAO{totalVehiculos=" + lista.size() + '}';
     }
 }
