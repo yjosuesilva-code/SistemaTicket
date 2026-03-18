@@ -207,6 +207,15 @@ public class TicketView {
         System.out.printf("  Adulto Mayor : %d tickets%n", porTipo.getOrDefault("ADULTO_MAYOR", 0));
     }
 
-
+    // ─────────────────────────────────────────────────────────────────────────
+    // HELPER — leer entero con manejo de error
+    // ─────────────────────────────────────────────────────────────────────────
+    private int leerEntero() {
+        try {
+            return Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
 
 }
