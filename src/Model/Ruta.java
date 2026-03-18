@@ -1,6 +1,6 @@
 package Model;
 
-public class Ruta {
+public class Ruta implements Imprimible {
     private String codigo;
     private String ciudadOrigen;
     private String ciudadDestino;
@@ -54,4 +54,19 @@ public class Ruta {
     public void setTiempoEstimadoMin(final int tiempoEstimadoMin) {
         this.tiempoEstimadoMin = tiempoEstimadoMin;
     }
+
+    @Override
+    public void imprimirDetalle() {
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║           DETALLE – RUTA             ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.printf( "║  Código         : %-18s  ║%n", codigo);
+        System.out.printf( "║  Origen         : %-18s  ║%n", ciudadOrigen);
+        System.out.printf( "║  Destino        : %-18s  ║%n", ciudadDestino);
+        System.out.printf( "║  Distancia      : %-15.1f km  ║%n", distanciaKm);
+        System.out.printf( "║  Tiempo estimado: %-13d min  ║%n", tiempoEstimadoMin);
+        System.out.println("╚══════════════════════════════════════╝");
+    }
+
+
 }
