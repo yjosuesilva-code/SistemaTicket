@@ -1,5 +1,14 @@
 package View;
 
+import Model.Ticket;
+import Service.TicketService;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
 /**
  * TicketView
  * Interfaz de consola para la gestión de tickets.
@@ -10,6 +19,7 @@ package View;
  */
 
 public class TicketView {
+
     // ─── Dependencias ─────────────────────────────────────────────────────────
     private TicketService ticketService;
     private Scanner       sc;
@@ -23,8 +33,8 @@ public class TicketView {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// MENÚ PRINCIPAL DE TICKETS
-// ─────────────────────────────────────────────────────────────────────────
+    // MENÚ PRINCIPAL DE TICKETS
+    // ─────────────────────────────────────────────────────────────────────────
     public void menuTickets() {
         int opcion;
         do {
@@ -58,8 +68,8 @@ public class TicketView {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// 1. VENDER TICKET
-// ─────────────────────────────────────────────────────────────────────────
+    // 1. VENDER TICKET
+    // ─────────────────────────────────────────────────────────────────────────
     private void venderTicket() {
         System.out.println("\n── Vender Ticket ───────────────────────");
         System.out.print("  Cédula del pasajero: ");
@@ -81,8 +91,8 @@ public class TicketView {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// 2. LISTAR TODOS LOS TICKETS
-// ─────────────────────────────────────────────────────────────────────────
+    // 2. LISTAR TODOS LOS TICKETS
+    // ─────────────────────────────────────────────────────────────────────────
     private void listarTickets() {
         List<Ticket> lista = ticketService.listarTickets();
         System.out.println("\n── Todos los Tickets (" + lista.size() + ") ──────────────");
@@ -96,34 +106,42 @@ public class TicketView {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// 3. BUSCAR POR PASAJERO
-// ─────────────────────────────────────────────────────────────────────────
+    // 3. BUSCAR POR PASAJERO
+    // ─────────────────────────────────────────────────────────────────────────
     private void buscarPorPasajero() {
         System.out.print("\n  Cédula del pasajero: ");
         String cedula = sc.nextLine().trim();
         List<Ticket> lista = ticketService.buscarTicketsPorPasajero(cedula);
         System.out.println("  Tickets encontrados: " + lista.size());
+        if (lista.isEmpty()) {
+            System.out.println("  No se encontraron tickets para la cédula: " + cedula);
+            return;
+        }
         for (Ticket t : lista) {
             t.imprimirDetalle();
         }
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// 4. BUSCAR POR VEHÍCULO
-// ─────────────────────────────────────────────────────────────────────────
+    // 4. BUSCAR POR VEHÍCULO
+    // ─────────────────────────────────────────────────────────────────────────
     private void buscarPorVehiculo() {
         System.out.print("\n  Placa del vehículo: ");
         String placa = sc.nextLine().trim().toUpperCase();
         List<Ticket> lista = ticketService.buscarTicketsPorVehiculo(placa);
         System.out.println("  Tickets encontrados: " + lista.size());
+        if (lista.isEmpty()) {
+            System.out.println("  No se encontraron tickets para la placa: " + placa);
+            return;
+        }
         for (Ticket t : lista) {
             t.imprimirDetalle();
         }
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-// 5. BUSCAR POR FECHA
-// ─────────────────────────────────────────────────────────────────────────
+    // 5. BUSCAR POR FECHA
+    // ─────────────────────────────────────────────────────────────────────────
     private void buscarPorFecha() {
         System.out.print("\n  Fecha (formato yyyy-MM-dd, ej. 2025-03-10): ");
         String fechaStr = sc.nextLine().trim();
@@ -131,6 +149,10 @@ public class TicketView {
             LocalDate fecha = LocalDate.parse(fechaStr);
             List<Ticket> lista = ticketService.buscarTicketsPorFecha(fecha);
             System.out.println("  Tickets encontrados: " + lista.size());
+            if (lista.isEmpty()) {
+                System.out.println("  No se encontraron tickets para la fecha: " + fechaStr);
+                return;
+            }
             for (Ticket t : lista) {
                 t.imprimirDetalle();
             }

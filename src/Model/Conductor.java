@@ -27,7 +27,7 @@ public class Conductor extends Persona{
     }
 
     public boolean tieneLicencia(){
-        return false;
+        return numLicencia != null && !numLicencia.trim().isEmpty();
     }
 
     @Override
