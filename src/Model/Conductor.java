@@ -32,7 +32,14 @@ public class Conductor extends Persona{
 
     @Override
     public void imprimirDetalle() {
-
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║         DETALLE – CONDUCTOR          ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.printf( "║  Cédula         : %-18s  ║%n", getCedula());
+        System.out.printf( "║  Nombre         : %-18s  ║%n", getNombre());
+        System.out.printf( "║  Núm. licencia  : %-18s  ║%n", numLicencia);
+        System.out.printf( "║  Categoría      : %-18s  ║%n", CateLicencia);
+        System.out.println("╚══════════════════════════════════════╝");
     }
 
     @Override
