@@ -189,4 +189,88 @@ public class PersonaView {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // 7. ACTUALIZAR CONDUCTOR
+    // ─────────────────────────────────────────────────────────────────────────
+    private void actualizarConductor() {
+        System.out.println("\n── Actualizar Conductor ────────────────");
+        System.out.print("  Cédula del conductor: ");
+        String cedula = sc.nextLine().trim();
+
+        Conductor c = personaService.buscarConductorPorCedula(cedula);
+        if (c == null) {
+            System.out.println("  ✘ Conductor no encontrado.");
+            return;
+        }
+        c.imprimirDetalle();
+
+        System.out.println("  ¿Qué desea actualizar?");
+        System.out.println("  1. Nombre   2. Licencia");
+        System.out.print("  Opción: ");
+        int op = leerEntero();
+
+        if (op == 1) {
+            System.out.print("  Nuevo nombre: ");
+            String nombre = sc.nextLine().trim();
+            personaService.actualizarNombreConductor(cedula, nombre);
+            System.out.println("  ✔ Nombre actualizado.");
+        } else if (op == 2) {
+            System.out.print("  Nuevo número de licencia: ");
+            String numLic = sc.nextLine().trim();
+            System.out.println("  Categoría: 1.B1  2.B2  3.C1  4.C2");
+            System.out.print("  Seleccione: ");
+            int catOp = leerEntero();
+            String[] categorias = {"B1", "B2", "C1", "C2"};
+            if (catOp < 1 || catOp > 4) {
+                System.out.println("  Categoría inválida.");
+                return;
+            }
+            personaService.actualizarLicencia(cedula, numLic, categorias[catOp - 1]);
+            System.out.println("  ✔ Licencia actualizada.");
+        } else {
+            System.out.println("  Opción inválida.");
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 8. ACTUALIZAR PASAJERO
+    // ─────────────────────────────────────────────────────────────────────────
+    private void actualizarPasajero() {
+        System.out.println("\n── Actualizar Pasajero ─────────────────");
+        System.out.print("  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+
+        Pasajero p = personaService.buscarPasajeroPorCedula(cedula);
+        if (p == null) {
+            System.out.println("  ✘ Pasajero no encontrado.");
+            return;
+        }
+        p.imprimirDetalle();
+
+        System.out.println("  ¿Qué desea actualizar?");
+        System.out.println("  1. Nombre   2. Tipo");
+        System.out.print("  Opción: ");
+        int op = leerEntero();
+
+        if (op == 1) {
+            System.out.print("  Nuevo nombre: ");
+            String nombre = sc.nextLine().trim();
+            personaService.actualizarNombrePasajero(cedula, nombre);
+            System.out.println("  ✔ Nombre actualizado.");
+        } else if (op == 2) {
+            System.out.println("  Nuevo tipo: 1.Regular  2.Estudiante  3.Adulto Mayor");
+            System.out.print("  Seleccione: ");
+            int tipoOp = leerEntero();
+            String[] tipos = {"REGULAR", "ESTUDIANTE", "ADULTO_MAYOR"};
+            if (tipoOp < 1 || tipoOp > 3) {
+                System.out.println("  Tipo inválido.");
+                return;
+            }
+            personaService.actualizarTipoPasajero(cedula, tipos[tipoOp - 1]);
+            System.out.println("  ✔ Tipo actualizado.");
+        } else {
+            System.out.println("  Opción inválida.");
+        }
+    }
+
 }
