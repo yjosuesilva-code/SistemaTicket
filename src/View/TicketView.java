@@ -139,4 +139,15 @@ public class TicketView {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+// 6. CANCELAR TICKET
+// ─────────────────────────────────────────────────────────────────────────
+    private void cancelarTicket() {
+        System.out.println("\n── Cancelar Ticket ─────────────────────");
+        System.out.print("  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+
+        List<Ticket> tickets = ticketService.buscarTicketsPorPasajero(cedula);
+    }
+
 }
