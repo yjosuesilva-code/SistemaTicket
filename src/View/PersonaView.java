@@ -32,4 +32,45 @@ public class PersonaView {
         this.personaService = personaService;
         this.sc             = sc;
     }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // MENÚ PRINCIPAL DE PERSONAS
+    // ─────────────────────────────────────────────────────────────────────────
+    public void menuPersonas() {
+        int opcion;
+        do {
+            System.out.println("\n╔══════════════════════════════════════╗");
+            System.out.println("║         GESTIÓN DE PERSONAS          ║");
+            System.out.println("╠══════════════════════════════════════╣");
+            System.out.println("║  1. Registrar conductor              ║");
+            System.out.println("║  2. Registrar pasajero               ║");
+            System.out.println("║  3. Listar conductores               ║");
+            System.out.println("║  4. Listar pasajeros                 ║");
+            System.out.println("║  5. Buscar conductor por cédula      ║");
+            System.out.println("║  6. Buscar pasajero por cédula       ║");
+            System.out.println("║  7. Actualizar datos de conductor    ║");
+            System.out.println("║  8. Actualizar datos de pasajero     ║");
+            System.out.println("║  9. Eliminar conductor               ║");
+            System.out.println("║ 10. Eliminar pasajero                ║");
+            System.out.println("║  0. Volver al menú principal         ║");
+            System.out.println("╚══════════════════════════════════════╝");
+            System.out.print("  Seleccione una opción: ");
+            opcion = leerEntero();
+
+            switch (opcion) {
+                case 1:  registrarConductor();          break;
+                case 2:  registrarPasajero();           break;
+                case 3:  listarConductores();           break;
+                case 4:  listarPasajeros();             break;
+                case 5:  buscarConductorPorCedula();    break;
+                case 6:  buscarPasajeroPorCedula();     break;
+                case 7:  actualizarConductor();         break;
+                case 8:  actualizarPasajero();          break;
+                case 9:  eliminarConductor();           break;
+                case 10: eliminarPasajero();            break;
+                case 0:  System.out.println("  Volviendo al menú principal..."); break;
+                default: System.out.println("  Opción inválida. Intente de nuevo.");
+            }
+        } while (opcion != 0);
+    }
 }
