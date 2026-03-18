@@ -87,14 +87,15 @@ public class VehiculoDao {
     }
 
     private void escribirLinea(Vehiculo v) {
-        File archivo = new File(RUTA_ARCHIVO);
-        archivo.getParentFile().mkdirs(); // crea carpeta data/ si no existe
+        String ruta = getRuta(v);
+        File archivo = new File(ruta);
+        archivo.getParentFile().mkdirs();
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
             bw.write(aLinea(v));
             bw.newLine();
         } catch (IOException e) {
-            System.err.println("[VehiculoDAO] Error al escribir línea: " + e.getMessage());
+            System.err.println("[VehiculoDAO] Error al escribir linea: " + e.getMessage());
         }
     }
 
