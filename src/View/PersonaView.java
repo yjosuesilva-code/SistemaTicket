@@ -273,4 +273,36 @@ public class PersonaView {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // 9. ELIMINAR CONDUCTOR
+    // ─────────────────────────────────────────────────────────────────────────
+    private void eliminarConductor() {
+        System.out.print("\n  Cédula del conductor a eliminar: ");
+        String cedula = sc.nextLine().trim();
+        System.out.print("  ¿Confirma eliminar? (1=Sí / 0=No): ");
+        int confirm = leerEntero();
+        if (confirm != 1) {
+            System.out.println("  Operación cancelada.");
+            return;
+        }
+        boolean ok = personaService.eliminarConductor(cedula);
+        System.out.println(ok ? "  ✔ Conductor eliminado." : "  ✘ Conductor no encontrado.");
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // 10. ELIMINAR PASAJERO
+    // ─────────────────────────────────────────────────────────────────────────
+    private void eliminarPasajero() {
+        System.out.print("\n  Cédula del pasajero a eliminar: ");
+        String cedula = sc.nextLine().trim();
+        System.out.print("  ¿Confirma eliminar? (1=Sí / 0=No): ");
+        int confirm = leerEntero();
+        if (confirm != 1) {
+            System.out.println("  Operación cancelada.");
+            return;
+        }
+        boolean ok = personaService.eliminarPasajero(cedula);
+        System.out.println(ok ? "  ✔ Pasajero eliminado." : "  ✘ Pasajero no encontrado.");
+    }
+
 }
