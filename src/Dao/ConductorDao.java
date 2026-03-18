@@ -142,12 +142,12 @@ public class ConductorDao {
             return null;
         }
 
-        String cedula = partes[0].trim();
-        String nombre = partes[1].trim();
-        String numLicencia = partes[2].trim();
+        String cedula            = partes[0].trim();
+        String nombre            = partes[1].trim();
+        String numLicencia       = partes[2].trim();
         String categoriaLicencia = partes[3].trim();
 
-        return new Conductor(cedula, nombre, numLicencia, categoriaLicencia);
+        return new Conductor(cedula, nombre, categoriaLicencia, numLicencia);
     }
 
     @Override
