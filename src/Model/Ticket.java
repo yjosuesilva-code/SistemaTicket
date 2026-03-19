@@ -7,6 +7,7 @@ public class Ticket implements Calculable {
     private String origen;
     private String destino;
     private double valorFinal;
+
     public Ticket(Pasajero pasajero, Vehiculo vehiculo, String origen, String destino) {
         this.pasajero = pasajero;
         this.vehiculo = vehiculo;

@@ -1,7 +1,10 @@
 package Model;
 
+import java.time.LocalDate;
+
 public abstract class Pasajero extends Persona {
     private String tipoPasajero;
+    private LocalDate fechaNacimiento;
 
     public Pasajero(String cedula, String nombre, String tipoPasajero) {
         super(cedula, nombre);
