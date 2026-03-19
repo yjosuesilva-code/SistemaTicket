@@ -19,6 +19,8 @@ public class PasajeroAdultoMayor extends Pasajero{
         System.out.printf( "║  Cédula         : %-18s  ║%n", getCedula());
         System.out.printf( "║  Nombre         : %-18s  ║%n", getNombre());
         System.out.printf( "║  Tipo           : %-18s  ║%n", getTipoPasajero());
+        System.out.printf( "║  Fecha nac.     : %-18s  ║%n", getFechaNacimiento());
+        System.out.printf( "║  Edad           : %-18d  ║%n", getEdad());
         System.out.printf( "║  Descuento      : %-18s  ║%n", "30%");
         System.out.println("╚══════════════════════════════════════╝");
     }
