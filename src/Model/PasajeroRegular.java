@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class PasajeroRegular extends Pasajero{
 
-    public PasajeroRegular( String cedula,  String nombre, String tipoPasajero, LocalDate fechaNacimiento) {
+    public PasajeroRegular( String cedula,  String nombre, LocalDate fechaNacimiento) {
         super(cedula, nombre, "Regular", fechaNacimiento);
     }
 
