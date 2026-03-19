@@ -107,25 +107,28 @@ public class PersonaView {
             return;
         }
 
-        System.out.println("  Tipo de pasajero:");
-        System.out.println("  1. Regular      (sin descuento)");
-        System.out.println("  2. Estudiante   (15% descuento)");
-        System.out.println("  3. Adulto Mayor (30% descuento)");
-        System.out.print("  Seleccione: ");
-        int tipo = leerEntero();
-
+        int edad = java.time.Period.between(fechaNacimiento, LocalDate.now()).getYears();
         Pasajero p;
-        switch (tipo) {
-            case 1: p = new PasajeroRegular(cedula, nombre);      break;
-            case 2: p = new PasajeroEstudiante(cedula, nombre);   break;
-            case 3: p = new PasajeroAdultoMayor(cedula, nombre);  break;
-            default:
-                System.out.println("  Tipo inválido.");
-                return;
-        }
 
+        if (edad >= 60) {
+            p = new PasajeroAdultoMayor(cedula, nombre, fechaNacimiento);
+            System.out.println("  ℹ Edad: " + edad + " años → categoría Adulto Mayor asignada automáticamente (30% descuento).");
+        } else {
+            System.out.println("  Tipo de pasajero:");
+            System.out.println("  1. Regular    (sin descuento)");
+            System.out.println("  2. Estudiante (15% descuento)");
+            System.out.print("  Seleccione: ");
+            int tipo = leerEntero();
+            switch (tipo) {
+                case 1: p = new PasajeroRegular(cedula, nombre, fechaNacimiento);    break;
+                case 2: p = new PasajeroEstudiante(cedula, nombre, fechaNacimiento); break;
+                default:
+                    System.out.println("  Tipo inválido.");
+                    return;
+            }
+        }
         boolean ok = personaService.registrarPasajero(p);
-        System.out.println(ok ? "  ✔ Pasajero registrado exitosamente." : "  ✘ No se pudo registrar el pasajero.");
+        System.out.println(ok ? "   Pasajero registrado exitosamente." : "   No se pudo registrar el pasajero.");
     }
 
 
