@@ -6,6 +6,7 @@ import Model.PasajeroEstudiante;
 import Model.PasajeroAdultoMayor;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,7 +129,8 @@ public class PasajeroDao {
     private String aLinea(Pasajero p) {
         return p.getCedula() + ";" +
                 p.getNombre() + ";" +
-                p.getTipoPasajero();
+                p.getTipoPasajero()+ ";"+
+                p.getFechaNacimiento();
     }
 
     private Pasajero parsearLinea(String linea) {
@@ -142,14 +144,14 @@ public class PasajeroDao {
         String cedula = partes[0].trim();
         String nombre = partes[1].trim();
         String tipo   = partes[2].trim().toUpperCase();
-
+        LocalDate fecha = LocalDate.parse(partes[3].trim());
         switch (tipo) {
             case "REGULAR":
-                return new PasajeroRegular(cedula, nombre);
+                return new PasajeroRegular(cedula, nombre, fecha);
             case "ESTUDIANTE":
-                return new PasajeroEstudiante(cedula, nombre);
+                return new PasajeroEstudiante(cedula, nombre,fecha);
             case "ADULTO_MAYOR":
-                return new PasajeroAdultoMayor(cedula, nombre);
+                return new PasajeroAdultoMayor(cedula, nombre,fecha);
             default:
                 System.err.println("[PasajeroDAO] Tipo de pasajero desconocido: " + tipo);
                 return null;
