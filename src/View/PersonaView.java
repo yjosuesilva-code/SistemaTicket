@@ -11,31 +11,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
- * PersonaView
- * Interfaz de consola para la gestión de conductores y pasajeros.
- * Solo interactúa con PersonaService, nunca con el DAO directamente.
- *
- * Capa: View
- * Proyecto: TransCesar S.A.S.
- */
+
 
 public class PersonaView {
-    // ─── Dependencias ─────────────────────────────────────────────────────────
     private PersonaService personaService;
     private Scanner        sc;
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────────────────────
+
     public PersonaView(PersonaService personaService, Scanner sc) {
         this.personaService = personaService;
         this.sc             = sc;
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // MENÚ PRINCIPAL DE PERSONAS
-    // ─────────────────────────────────────────────────────────────────────────
+
     public void menuPersonas() {
         int opcion;
         do {
@@ -74,9 +62,7 @@ public class PersonaView {
         } while (opcion != 0);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 1. REGISTRAR CONDUCTOR
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void registrarConductor() {
         System.out.println("\n── Registrar Conductor ─────────────────");
         System.out.print("  Cédula: ");
@@ -101,15 +87,15 @@ public class PersonaView {
         System.out.println(ok ? "  ✔ Conductor registrado exitosamente." : "  ✘ No se pudo registrar el conductor.");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 2. REGISTRAR PASAJERO
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void registrarPasajero() {
         System.out.println("\n── Registrar Pasajero ──────────────────");
         System.out.print("  Cédula: ");
         String cedula = sc.nextLine().trim();
         System.out.print("  Nombre completo: ");
         String nombre = sc.nextLine().trim();
+        System.out.println("  Fecha de nacimiento (yyyy-MM-dd): ");
+        String fechaStr= sc.nextLine().trim();
         System.out.println("  Tipo de pasajero:");
         System.out.println("  1. Regular      (sin descuento)");
         System.out.println("  2. Estudiante   (15% descuento)");
@@ -131,9 +117,7 @@ public class PersonaView {
         System.out.println(ok ? "  ✔ Pasajero registrado exitosamente." : "  ✘ No se pudo registrar el pasajero.");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 3. LISTAR CONDUCTORES
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void listarConductores() {
         List<Conductor> lista = personaService.listarConductores();
         System.out.println("\n── Conductores registrados (" + lista.size() + ") ──────────");
@@ -146,9 +130,7 @@ public class PersonaView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 4. LISTAR PASAJEROS
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void listarPasajeros() {
         List<Pasajero> lista = personaService.listarPasajeros();
         System.out.println("\n── Pasajeros registrados (" + lista.size() + ") ───────────");
@@ -161,9 +143,7 @@ public class PersonaView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 5. BUSCAR CONDUCTOR
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void buscarConductorPorCedula() {
         System.out.print("\n  Cédula del conductor: ");
         String cedula = sc.nextLine().trim();
@@ -175,9 +155,7 @@ public class PersonaView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 6. BUSCAR PASAJERO
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void buscarPasajeroPorCedula() {
         System.out.print("\n  Cédula del pasajero: ");
         String cedula = sc.nextLine().trim();
@@ -189,9 +167,7 @@ public class PersonaView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 7. ACTUALIZAR CONDUCTOR
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void actualizarConductor() {
         System.out.println("\n── Actualizar Conductor ────────────────");
         System.out.print("  Cédula del conductor: ");
@@ -232,9 +208,6 @@ public class PersonaView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 8. ACTUALIZAR PASAJERO
-    // ─────────────────────────────────────────────────────────────────────────
     private void actualizarPasajero() {
         System.out.println("\n── Actualizar Pasajero ─────────────────");
         System.out.print("  Cédula del pasajero: ");
@@ -273,9 +246,7 @@ public class PersonaView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 9. ELIMINAR CONDUCTOR
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void eliminarConductor() {
         System.out.print("\n  Cédula del conductor a eliminar: ");
         String cedula = sc.nextLine().trim();
@@ -289,9 +260,7 @@ public class PersonaView {
         System.out.println(ok ? "  ✔ Conductor eliminado." : "  ✘ Conductor no encontrado.");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 10. ELIMINAR PASAJERO
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void eliminarPasajero() {
         System.out.print("\n  Cédula del pasajero a eliminar: ");
         String cedula = sc.nextLine().trim();
@@ -305,9 +274,7 @@ public class PersonaView {
         System.out.println(ok ? "  ✔ Pasajero eliminado." : "  ✘ Pasajero no encontrado.");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // HELPER — leer entero con manejo de error
-    // ─────────────────────────────────────────────────────────────────────────
+
     private int leerEntero() {
         try {
             return Integer.parseInt(sc.nextLine().trim());
