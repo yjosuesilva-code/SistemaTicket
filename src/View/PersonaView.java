@@ -7,6 +7,8 @@ import Model.PasajeroEstudiante;
 import Model.PasajeroRegular;
 import Service.PersonaService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -96,6 +98,15 @@ public class PersonaView {
         String nombre = sc.nextLine().trim();
         System.out.println("  Fecha de nacimiento (yyyy-MM-dd): ");
         String fechaStr= sc.nextLine().trim();
+
+        LocalDate fechaNacimiento;
+        try {
+            fechaNacimiento = LocalDate.parse(fechaStr);
+        } catch (DateTimeParseException e) {
+            System.out.println("  Formato de fecha inválido. Use yyyy-MM-dd.");
+            return;
+        }
+
         System.out.println("  Tipo de pasajero:");
         System.out.println("  1. Regular      (sin descuento)");
         System.out.println("  2. Estudiante   (15% descuento)");
