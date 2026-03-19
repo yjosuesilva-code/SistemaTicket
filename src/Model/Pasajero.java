@@ -28,7 +28,12 @@ public abstract class Pasajero extends Persona {
     public void setFechaNacimiento(final LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
+    public int getEdad(){
+        return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+    }
+    public boolean esAdultoMayor(){
+        return getEdad()>=60;
+    }
 
     @Override
     public abstract void imprimirDetalle();
