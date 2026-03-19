@@ -147,10 +147,13 @@ public class PasajeroDao {
         LocalDate fecha = LocalDate.parse(partes[3].trim());
         switch (tipo) {
             case "REGULAR":
-                return new PasajeroRegular(cedula, nombre, fecha);
+
+                return new PasajeroRegular(cedula, nombre,fecha);
             case "ESTUDIANTE":
+
                 return new PasajeroEstudiante(cedula, nombre,fecha);
             case "ADULTO_MAYOR":
+
                 return new PasajeroAdultoMayor(cedula, nombre,fecha);
             default:
                 System.err.println("[PasajeroDAO] Tipo de pasajero desconocido: " + tipo);
