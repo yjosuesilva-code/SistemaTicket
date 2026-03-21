@@ -1,9 +1,11 @@
 package View;
 import Dao.VehiculoDao;
 import Dao.ConductorDao;
+import Dao.ReservaDao;
 import Dao.PasajeroDao;
 import Dao.TicketDao;
 import Service.VehiculoService;
+import Service.ReservaService;
 import Service.PersonaService;
 import Service.TicketService;
 
@@ -16,19 +18,20 @@ public class Main {
         ConductorDao conductorDao = new ConductorDao();
         PasajeroDao pasajeroDao = new PasajeroDao();
         TicketDao ticketDao = new TicketDao();
+        ReservaDao   reservaDao   = new ReservaDao();
 
 
         VehiculoService vehiculoService = new VehiculoService(vehiculoDao);
         PersonaService personaService = new PersonaService(conductorDao, pasajeroDao);
         TicketService ticketService = new TicketService(ticketDao, vehiculoDao, pasajeroDao);
-
+        ReservaService  reservaService  = new ReservaService(reservaDao, vehiculoDao, pasajeroDao, ticketDao, ticketService);
         Scanner sc = new Scanner(System.in);
 
         VehiculoView vehiculoView = new VehiculoView(vehiculoService, personaService, sc);
         PersonaView personaView = new PersonaView(personaService, sc);
         TicketView ticketView = new TicketView(ticketService, sc);
         ReporteView  reporteView  = new ReporteView(ticketService, sc);
-
+        ReservaView  reservaView  = new ReservaView(reservaService, sc);
         Main menu = new Main();
         menu.ejecutar(vehiculoView, personaView, ticketView, reporteView, sc);
 
