@@ -222,16 +222,16 @@ public class TicketService {
         System.out.println("╔══════════════════════════════════════════╗");
         System.out.println("║         ESTADÍSTICAS DEL SISTEMA         ║");
         System.out.println("╠══════════════════════════════════════════╣");
-        System.out.printf("║  Total tickets vendidos : %-14d  ║%n", listarTickets().size());
-        System.out.printf("║  Total recaudado        : $%-13.0f  ║%n", totalRecaudado());
+        System.out.printf( "║  Total tickets vendidos : %-14d  ║%n", listarTickets().size());
+        System.out.printf( "║  Total recaudado        : $%-13.0f  ║%n", totalRecaudado());
         System.out.println("╠══════════════════════════════════════════╣");
-
         Map<String, Integer> porTipo = pasajerosPorTipo();
-        System.out.printf("║  Pasajeros regulares    : %-14d  ║%n", porTipo.get("REGULAR"));
-        System.out.printf("║  Pasajeros estudiantes  : %-14d  ║%n", porTipo.get("ESTUDIANTE"));
-        System.out.printf("║  Pasajeros adulto mayor : %-14d  ║%n", porTipo.get("ADULTO_MAYOR"));
+        System.out.printf( "║  Pasajeros regulares    : %-14d  ║%n", porTipo.get("REGULAR"));
+        System.out.printf( "║  Pasajeros estudiantes  : %-14d  ║%n", porTipo.get("ESTUDIANTE"));
+        System.out.printf( "║  Pasajeros adulto mayor : %-14d  ║%n", porTipo.get("ADULTO_MAYOR"));
         System.out.println("╠══════════════════════════════════════════╣");
-        System.out.printf("║  Vehículo más tickets   : %-14s  ║%n", vehiculoConMasTickets());
+        System.out.printf( "║  Vehículo más tickets   : %-14s  ║%n", vehiculoConMasTickets());
+        System.out.printf( "║  Hoy es festivo         : %-14s  ║%n", esFestivo(LocalDate.now()) ? "Sí (+20%)" : "No");
         System.out.println("╚══════════════════════════════════════════╝");
     }
 
