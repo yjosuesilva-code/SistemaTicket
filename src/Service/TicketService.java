@@ -16,6 +16,22 @@ import java.util.Map;
 public class TicketService {
     private static final int MAX_TICKETS_POR_DIA = 3;
     private static final double RECARGO_FESTIVO  = 0.20;
+
+    private static final Set<LocalDate> FESTIVOS = new HashSet<>(Arrays.asList(
+            LocalDate.of(LocalDate.now().getYear(), 1,  1),   // Año Nuevo
+            LocalDate.of(LocalDate.now().getYear(), 1,  6),   // Reyes Magos
+            LocalDate.of(LocalDate.now().getYear(), 3, 24),   // San José
+            LocalDate.of(LocalDate.now().getYear(), 5,  1),   // Día del Trabajo
+            LocalDate.of(LocalDate.now().getYear(), 7, 20),   // Independencia
+            LocalDate.of(LocalDate.now().getYear(), 8,  7),   // Batalla de Boyacá
+            LocalDate.of(LocalDate.now().getYear(), 8, 18),   // Asunción de la Virgen
+            LocalDate.of(LocalDate.now().getYear(),10, 13),   // Día de la Raza
+            LocalDate.of(LocalDate.now().getYear(),11,  3),   // Todos los Santos
+            LocalDate.of(LocalDate.now().getYear(),11, 17),   // Independencia de Cartagena
+            LocalDate.of(LocalDate.now().getYear(),12,  8),   // Inmaculada Concepción
+            LocalDate.of(LocalDate.now().getYear(),12, 25)    // Navidad
+    ));
+
     private TicketDao   ticketDao;
     private VehiculoDao vehiculoDao;
     private PasajeroDao pasajeroDao;
@@ -24,6 +40,10 @@ public class TicketService {
         this.ticketDao   = ticketDao;
         this.vehiculoDao = vehiculoDao;
         this.pasajeroDao = pasajeroDao;
+    }
+
+    public boolean esFestivo(LocalDate fecha) {
+        return FESTIVOS.contains(fecha);
     }
 
     public Ticket venderTicket(String cedPasajero, String placaVehiculo,
