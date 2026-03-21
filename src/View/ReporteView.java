@@ -39,4 +39,26 @@ public class ReporteView {
         } while (opcion != 0);
     }
 
+    private void reportePorFecha() {
+        System.out.print("\n  Fecha (yyyy-MM-dd): ");
+        String fechaStr = sc.nextLine().trim();
+        try {
+            LocalDate fecha = LocalDate.parse(fechaStr);
+            List<Ticket> lista = ticketService.buscarTicketsPorFecha(fecha);
+            System.out.println("\n── Tickets del " + fecha + " (" + lista.size() + ") ──────────");
+            if (lista.isEmpty()) {
+                System.out.println("  No hay tickets para esa fecha.");
+                return;
+            }
+            double total = 0;
+            for (Ticket t : lista) {
+                t.imprimirDetalle();
+                total += t.getValorFinal();
+            }
+            System.out.printf("  Total recaudado ese día: $%.0f%n", total);
+        } catch (DateTimeParseException e) {
+            System.out.println("  ✘ Formato inválido. Use yyyy-MM-dd.");
+        }
+    }
+
 }
