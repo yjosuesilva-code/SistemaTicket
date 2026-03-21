@@ -109,5 +109,26 @@ public class ReservaView {
         }
     }
 
+    private void convertirEnTicket() {
+        System.out.println("\n── Convertir Reserva en Ticket ─────────");
+        System.out.print("  Código de la reserva: ");
+        String codigo = sc.nextLine().trim().toUpperCase();
+
+        System.out.print("  Ciudad de origen: ");
+        String origen = sc.nextLine().trim();
+
+        System.out.print("  Ciudad de destino: ");
+        String destino = sc.nextLine().trim();
+
+        Ticket ticket = reservaService.convertirEnTicket(codigo, origen, destino);
+        if (ticket != null) {
+            System.out.println("\n  ✔ Reserva convertida en ticket exitosamente:");
+            ticket.imprimirDetalle();
+        } else {
+            System.out.println("  ✘ No se pudo convertir la reserva en ticket.");
+        }
+    }
+
+
 
 }
