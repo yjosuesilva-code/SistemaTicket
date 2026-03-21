@@ -158,4 +158,15 @@ public class ReservaService {
         return ticket;
     }
 
+    public int verificarVencidas() {
+        int canceladas = 0;
+        for (Reserva r : reservaDao.listarActivas()) {
+            if (r.estaVencida()) {
+                reservaDao.actualizarEstado(r.getCodigo(), Reserva.Estado.CANCELADA);
+                canceladas++;
+            }
+        }
+        return canceladas;
+    }
+
 }
