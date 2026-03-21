@@ -57,5 +57,9 @@ public class Reserva {
         System.out.printf( "║  Estado         : %-22s║%n", estado.toString());
         System.out.println("╚══════════════════════════════════════════╝");
     }
-
+    @Override
+    public String toString() {
+        return "Reserva{codigo='" + codigo + "', pasajero=" + pasajero.getCedula()
+                + ", vehiculo=" + vehiculo.getPlaca() + ", estado=" + estado + "}";
+    }
 }
