@@ -30,5 +30,12 @@ public class Reserva {
         this.fechaViaje    = fechaViaje;
         this.estado        = estado;
     }
+    public String getCodigo()               { return codigo; }
+    public Pasajero getPasajero()           { return pasajero; }
+    public Vehiculo getVehiculo()           { return vehiculo; }
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
+    public LocalDate getFechaViaje()        { return fechaViaje; }
+    public Estado getEstado()               { return estado; }
 
+    public void setEstado(Estado estado)    { this.estado = estado; }
 }
