@@ -87,4 +87,16 @@ public class ReservaDao {
             System.err.println("[ReservaDao] Error al escribir línea: " + e.getMessage());
         }
     }
+    private void escribirArchivo() {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {
+            for (Reserva r : lista) {
+                bw.write(aLinea(r));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("[ReservaDao] Error al reescribir archivo: " + e.getMessage());
+        }
+    }
 }
