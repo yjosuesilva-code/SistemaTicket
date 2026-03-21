@@ -113,6 +113,49 @@ public class ReservaService {
         return reservaDao.buscarPorPasajero(cedula);
     }
 
+    public Ticket convertirEnTicket(String codigo, String origen, String destino) {
+        Reserva reserva = reservaDao.buscarPorCodigo(codigo);
 
+        if (reserva == null) {
+            System.out.println("[ReservaService] Error: no existe reserva con código " + codigo);
+            return null;
+        }
+        if (reserva.getEstado() != Reserva.Estado.ACTIVA) {
+            System.out.println("[ReservaService] Error: la reserva " + codigo
+                    + " no está activa (estado: " + reserva.getEstado() + ").");
+            return null;
+        }
+
+        Vehiculo vehiculo = vehiculoDao.buscarPorPlaca(reserva.getVehiculo().getPlaca());
+        if (vehiculo == null) {
+            System.out.println("[ReservaService] Error: vehículo no encontrado.");
+            return null;
+        }
+
+        double tarifaOriginal = vehiculo.getTarifaBase();
+        if (ticketService.esFestivo(reserva.getFechaViaje())) {
+            vehiculo.setTarifaBase(tarifaOriginal * (1 + RECARGO_FESTIVO));
+            System.out.println("[ReservaService] Aviso: la fecha de viaje es festivo. Recargo 20% aplicado.");
+        }
+
+
+        Ticket ticket = new Ticket(reserva.getPasajero(), vehiculo, origen, destino);
+
+        vehiculo.setTarifaBase(tarifaOriginal);
+
+        vehiculo.setContadorPasajeros(vehiculo.getContadorPasajeros() + 1);
+        if (!vehiculo.hayCapacidad()) {
+            vehiculo.setDisponible(false);
+            System.out.println("[ReservaService] Aviso: vehículo " + vehiculo.getPlaca() + " ha alcanzado su capacidad máxima.");
+        }
+        vehiculoDao.actualizar(vehiculo);
+
+        ticketDao.guardar(ticket);
+
+        reservaDao.actualizarEstado(codigo, Reserva.Estado.CONVERTIDA);
+
+        System.out.println("[ReservaService] Reserva convertida en ticket exitosamente.");
+        return ticket;
+    }
 
 }
