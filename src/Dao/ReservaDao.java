@@ -45,4 +45,15 @@ public class ReservaDao {
             if (r.getEstado() == Reserva.Estado.ACTIVA) activas.add(r);
         return activas;
     }
+    public Reserva buscarPorCodigo(String codigo) {
+        for (Reserva r : lista)
+            if (r.getCodigo().equalsIgnoreCase(codigo.trim())) return r;
+        return null;
+    }
+    public List<Reserva> buscarPorPasajero(String cedula) {
+        List<Reserva> resultado = new ArrayList<>();
+        for (Reserva r : lista)
+            if (r.getPasajero().getCedula().equalsIgnoreCase(cedula.trim())) resultado.add(r);
+        return resultado;
+    }
 }
