@@ -1,4 +1,5 @@
 package Model;
+import java.time.LocalDate;
 
 public class Ticket implements Calculable {
     private Pasajero pasajero;
