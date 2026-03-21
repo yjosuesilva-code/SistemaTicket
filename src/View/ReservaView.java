@@ -122,10 +122,21 @@ public class ReservaView {
 
         Ticket ticket = reservaService.convertirEnTicket(codigo, origen, destino);
         if (ticket != null) {
-            System.out.println("\n  ✔ Reserva convertida en ticket exitosamente:");
+            System.out.println("\n   Reserva convertida en ticket exitosamente:");
             ticket.imprimirDetalle();
         } else {
-            System.out.println("  ✘ No se pudo convertir la reserva en ticket.");
+            System.out.println("   No se pudo convertir la reserva en ticket.");
+        }
+    }
+    private void verificarVencidas() {
+        System.out.println("\n── Verificar Reservas Vencidas ─────────");
+        System.out.println("  Verificando reservas con más de 24 horas sin confirmar...");
+        int canceladas = reservaService.verificarVencidas();
+        if (canceladas == 0) {
+            System.out.println("   No se encontraron reservas vencidas.");
+        } else {
+            System.out.println("   Se cancelaron " + canceladas
+                    + " reserva(s) vencida(s). Los cupos fueron liberados.");
         }
     }
 
