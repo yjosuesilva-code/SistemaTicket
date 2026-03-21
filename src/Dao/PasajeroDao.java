@@ -136,7 +136,7 @@ public class PasajeroDao {
     private Pasajero parsearLinea(String linea) {
         String[] partes = linea.split(";");
 
-        if (partes.length != 3) {
+        if (partes.length != 4) {
             System.err.println("[PasajeroDAO] Línea con formato incorrecto: " + linea);
             return null;
         }

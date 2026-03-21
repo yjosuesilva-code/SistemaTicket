@@ -1,7 +1,14 @@
 package View;
 
+import Model.Ticket;
+import Model.Buseta;
+import Model.MicroBus;
+import Model.Bus;
 import Service.TicketService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ReporteView {
