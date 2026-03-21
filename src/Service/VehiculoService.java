@@ -2,7 +2,7 @@ package Service;
 
 import Dao.VehiculoDao;
 import Model.Vehiculo;
-import Model.Coductor;
+import Model.Conductor;
 import java.util.ArrayList;
 import java.util.List;
 
