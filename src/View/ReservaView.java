@@ -93,5 +93,21 @@ public class ReservaView {
                 : "   No se pudo cancelar la reserva.");
     }
 
+    private void historialPorPasajero() {
+        System.out.println("\n── Historial de Reservas por Pasajero ──");
+        System.out.print("  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+
+        List<Reserva> historial = reservaService.historialPorPasajero(cedula);
+        System.out.println("  Reservas encontradas: " + historial.size());
+        if (historial.isEmpty()) {
+            System.out.println("  No se encontraron reservas para la cédula: " + cedula);
+            return;
+        }
+        for (Reserva r : historial) {
+            r.imprimirDetalle();
+        }
+    }
+
 
 }
