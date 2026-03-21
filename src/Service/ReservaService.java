@@ -87,5 +87,32 @@ public class ReservaService {
         return reserva;
     }
 
+    public boolean cancelarReserva(String codigo) {
+        Reserva reserva = reservaDao.buscarPorCodigo(codigo);
+        if (reserva == null) {
+            System.out.println("[ReservaService] Error: no existe reserva con código " + codigo);
+            return false;
+        }
+        if (reserva.getEstado() != Reserva.Estado.ACTIVA) {
+            System.out.println("[ReservaService] Error: la reserva " + codigo
+                    + " no está activa (estado: " + reserva.getEstado() + ").");
+            return false;
+        }
+        reservaDao.actualizarEstado(codigo, Reserva.Estado.CANCELADA);
+        System.out.println("[ReservaService] Reserva " + codigo + " cancelada. Cupo liberado.");
+        return true;
+    }
+
+
+    public List<Reserva> listarActivas() {
+        return reservaDao.listarActivas();
+    }
+
+
+    public List<Reserva> historialPorPasajero(String cedula) {
+        return reservaDao.buscarPorPasajero(cedula);
+    }
+
+
 
 }
