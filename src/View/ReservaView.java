@@ -1,5 +1,12 @@
 package View;
 
+import Model.Reserva;
+import Model.Ticket;
+import Service.ReservaService;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ReservaView {
@@ -46,6 +53,25 @@ public class ReservaView {
             return Integer.parseInt(sc.nextLine().trim());
         } catch (NumberFormatException e) {
             return -1;
+        }
+    }
+    private void crearReserva() {
+        System.out.println("\n── Crear Nueva Reserva ─────────────────");
+        System.out.print("  Cédula del pasajero: ");
+        String cedula = sc.nextLine().trim();
+
+        System.out.print("  Placa del vehículo: ");
+        String placa = sc.nextLine().trim().toUpperCase();
+
+        LocalDate fechaViaje = leerFecha("  Fecha del viaje (yyyy-MM-dd): ");
+        if (fechaViaje == null) return;
+
+        Reserva reserva = reservaService.crearReserva(cedula, placa, fechaViaje);
+        if (reserva != null) {
+            System.out.println("\n  ✔ Reserva creada exitosamente:");
+            reserva.imprimirDetalle();
+        } else {
+            System.out.println("  ✘ No se pudo crear la reserva. Revise los datos ingresados.");
         }
     }
 
