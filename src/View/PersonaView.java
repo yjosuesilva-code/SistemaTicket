@@ -84,7 +84,7 @@ public class PersonaView {
         }
         String categoria = categorias[catOp - 1];
 
-        Conductor c = new Conductor(cedula, nombre, numLicencia, categoria);
+        Conductor c = new Conductor(cedula, nombre,categoria ,numLicencia );
         boolean ok = personaService.registrarConductor(c);
         System.out.println(ok ? "  ✔ Conductor registrado exitosamente." : "  ✘ No se pudo registrar el conductor.");
     }
