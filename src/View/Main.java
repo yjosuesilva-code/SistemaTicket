@@ -6,11 +6,7 @@ import Dao.TicketDao;
 import Service.VehiculoService;
 import Service.PersonaService;
 import Service.TicketService;
-import View.VehiculoView;
-import View.PersonaView;
-import View.TicketView;
-import View.ReporteView;
-import View.MenuPrincipal;
+
 import java.util.Scanner;
 
 public class Main {
@@ -33,7 +29,7 @@ public class Main {
         TicketView ticketView = new TicketView(ticketService, sc);
         ReporteView  reporteView  = new ReporteView(ticketService, sc);
 
-        MenuPrincipal menu = new MenuPrincipal();
+        Main menu = new Main();
         menu.ejecutar(vehiculoView, personaView, ticketView, reporteView, sc);
 
         sc.close();
