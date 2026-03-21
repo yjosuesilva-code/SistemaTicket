@@ -169,4 +169,8 @@ public class ReservaService {
         return canceladas;
     }
 
+    @Override
+    public String toString() {
+        return "ReservaService{totalReservas=" + reservaDao.listarTodos().size() + "}";
+    }
 }
