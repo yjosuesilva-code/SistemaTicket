@@ -38,4 +38,9 @@ public class Reserva {
     public Estado getEstado()               { return estado; }
 
     public void setEstado(Estado estado)    { this.estado = estado; }
+
+    public boolean estaVencida() {
+        return estado == Estado.ACTIVA &&
+                fechaCreacion.isBefore(LocalDateTime.now().minusHours(24));
+    }
 }
