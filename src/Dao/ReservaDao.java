@@ -118,4 +118,54 @@ public class ReservaDao {
                 r.getFechaViaje().toString()             + ";" +
                 r.getEstado().toString();
     }
+    private Reserva parsearLinea(String linea) {
+        String[] p = linea.split(";");
+        if (p.length != CAMPOS) {
+            System.err.println("[ReservaDao] Línea con formato incorrecto (" + p.length + " campos): " + linea);
+            return null;
+        }
+        try {
+            String    codigo          = p[0].trim();
+            String    cedula          = p[1].trim();
+            String    nombre          = p[2].trim();
+            String    tipoPasajero    = p[3].trim().toUpperCase();
+            LocalDate fechaNacimiento = LocalDate.parse(p[4].trim());
+
+            Pasajero pasajero;
+            switch (tipoPasajero) {
+                case "REGULAR":      pasajero = new PasajeroRegular(cedula, nombre, fechaNacimiento);     break;
+                case "ESTUDIANTE":   pasajero = new PasajeroEstudiante(cedula, nombre, fechaNacimiento);  break;
+                case "ADULTO_MAYOR": pasajero = new PasajeroAdultoMayor(cedula, nombre, fechaNacimiento); break;
+                default:
+                    System.err.println("[ReservaDao] Tipo pasajero desconocido: " + tipoPasajero);
+                    return null;
+            }
+
+            String  placa        = p[5].trim();
+            String  tipoVehiculo = p[6].trim().toUpperCase();
+            String  ruta         = p[7].trim();
+            double  tarifaBase   = Double.parseDouble(p[8].trim());
+
+            Vehiculo vehiculo;
+            switch (tipoVehiculo) {
+                case "BUSETA":   vehiculo = new Buseta(placa, ruta);   break;
+                case "MICROBUS": vehiculo = new MicroBus(placa, ruta); break;
+                case "BUS":      vehiculo = new Bus(placa, ruta);      break;
+                default:
+                    System.err.println("[ReservaDao] Tipo vehículo desconocido: " + tipoVehiculo);
+                    return null;
+            }
+            vehiculo.setTarifaBase(tarifaBase);
+
+            LocalDateTime fechaCreacion = LocalDateTime.parse(p[9].trim());
+            LocalDate     fechaViaje    = LocalDate.parse(p[10].trim());
+            Reserva.Estado estado       = Reserva.Estado.valueOf(p[11].trim().toUpperCase());
+
+            return new Reserva(codigo, pasajero, vehiculo, fechaCreacion, fechaViaje, estado);
+
+        } catch (Exception e) {
+            System.err.println("[ReservaDao] Error al parsear línea: " + linea + " → " + e.getMessage());
+            return null;
+        }
+    }
 }
