@@ -56,4 +56,15 @@ public class ReservaDao {
             if (r.getPasajero().getCedula().equalsIgnoreCase(cedula.trim())) resultado.add(r);
         return resultado;
     }
+    public int contarActivasPorVehiculoYFecha(String placa, LocalDate fechaViaje) {
+        int count = 0;
+        for (Reserva r : lista) {
+            if (r.getEstado() == Reserva.Estado.ACTIVA
+                    && r.getVehiculo().getPlaca().equalsIgnoreCase(placa)
+                    && r.getFechaViaje().equals(fechaViaje)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
