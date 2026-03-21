@@ -14,6 +14,8 @@ import java.util.Map;
 
 
 public class TicketService {
+    private static final int MAX_TICKETS_POR_DIA = 3;
+    private static final double RECARGO_FESTIVO  = 0.20;
     private TicketDao   ticketDao;
     private VehiculoDao vehiculoDao;
     private PasajeroDao pasajeroDao;
