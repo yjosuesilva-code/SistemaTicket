@@ -77,4 +77,14 @@ public class ReservaDao {
         }
         return false;
     }
+    private void escribirLinea(Reserva r) {
+        File archivo = new File(RUTA_ARCHIVO);
+        archivo.getParentFile().mkdirs();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+            bw.write(aLinea(r));
+            bw.newLine();
+        } catch (IOException e) {
+            System.err.println("[ReservaDao] Error al escribir línea: " + e.getMessage());
+        }
+    }
 }
