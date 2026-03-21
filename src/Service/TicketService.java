@@ -81,6 +81,18 @@ public class TicketService {
             System.out.println("[TicketService] Aviso: el vehículo " + placaVehiculo + " ha alcanzado su capacidad máxima.");
         }
 
+        LocalDate hoy = LocalDate.now();
+        List<Ticket> ticketsHoy = ticketDao.buscarPorFecha(hoy);
+        int conteo = 0;
+        for (Ticket t : ticketsHoy)
+            if (t.getPasajero().getCedula().equalsIgnoreCase(cedPasajero)) conteo++;
+
+        if (conteo >= MAX_TICKETS_POR_DIA) {
+            System.out.println("[TicketService] Error: el pasajero " + pasajero.getNombre()
+                    + " ya tiene " + conteo + " ticket(s) comprados hoy. Límite: " + MAX_TICKETS_POR_DIA);
+            return null;
+        }
+
         vehiculoDao.actualizar(vehiculo);
 
         ticketDao.guardar(ticket);
