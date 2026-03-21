@@ -39,7 +39,8 @@ public class Main {
     }
 
     public void ejecutar(VehiculoView vehiculoView, PersonaView personaView,
-                         TicketView ticketView, ReporteView reporteView, Scanner sc) {
+                         TicketView ticketView, ReporteView reporteView,
+                         ReservaView reservaView, Scanner sc) {
         int opcion;
         System.out.println("╔══════════════════════════════════════════╗");
         System.out.println("║    SISTEMA TRANSCESAR S.A.S.             ║");
@@ -54,6 +55,7 @@ public class Main {
             System.out.println("║  2. Gestión de Personas              ║");
             System.out.println("║  3. Gestión de Tickets               ║");
             System.out.println("║  4. Reportes                         ║");
+            System.out.println("║  5. Gestión de Reservas              ║");
             System.out.println("║  0. Salir del sistema                ║");
             System.out.println("╚══════════════════════════════════════╝");
             System.out.print("  Seleccione una opción: ");
@@ -65,6 +67,7 @@ public class Main {
                 case 2: personaView.menuPersonas();    break;
                 case 3: ticketView.menuTickets();      break;
                 case 4: reporteView.menuReportes();    break;
+                case 5: reservaView.menuReservas();    break;
                 case 0:
                     System.out.println("\n  Gracias por usar TransCesar S.A.S.");
                     System.out.println("  ¡Hasta pronto!");
@@ -74,6 +77,7 @@ public class Main {
             }
         } while (opcion != 0);
     }
+
 
     private int leerEntero(Scanner sc) {
         try {
