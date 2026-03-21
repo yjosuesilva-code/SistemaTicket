@@ -96,4 +96,38 @@ public class ReporteView {
         }
     }
 
+    private void reportePorTipoPasajero() {
+        System.out.println("\n  Tipo de pasajero:");
+        System.out.println("  1. Regular   2. Estudiante   3. Adulto Mayor");
+        System.out.print("  Seleccione: ");
+        int op = leerEntero();
+
+        String tipo;
+        switch (op) {
+            case 1: tipo = "Regular";      break;
+            case 2: tipo = "Estudiante";   break;
+            case 3: tipo = "Adulto_Mayor"; break;
+            default:
+                System.out.println("  Opción inválida.");
+                return;
+        }
+
+        List<Ticket> todos = ticketService.listarTickets();
+        System.out.println("\n── Tickets de pasajeros tipo " + tipo + " ──────────");
+        int conteo = 0;
+        double total = 0;
+        for (Ticket t : todos) {
+            if (t.getPasajero().getTipoPasajero().equalsIgnoreCase(tipo)) {
+                t.imprimirDetalle();
+                total += t.getValorFinal();
+                conteo++;
+            }
+        }
+        if (conteo == 0) {
+            System.out.println("  No hay tickets para ese tipo de pasajero.");
+        } else {
+            System.out.printf("  Total tickets: %d | Total recaudado: $%.0f%n", conteo, total);
+        }
+    }
+
 }
