@@ -18,7 +18,7 @@ import java.util.List;
 public class TicketDao {
     private static final String RUTA_ARCHIVO = "data/tickets.txt";
 
-    private static final int CAMPOS = 11;
+    private static final int CAMPOS = 12;
 
     private List<Ticket> lista;
 
@@ -157,16 +157,17 @@ public class TicketDao {
         else if (t.getVehiculo() instanceof MicroBus) tipoVehiculo = "MICROBUS";
         else tipoVehiculo = "BUS";
 
-        return t.getPasajero().getCedula() + ";" +
-                t.getPasajero().getNombre() + ";" +
-                t.getPasajero().getTipoPasajero() + ";" +
-                t.getVehiculo().getPlaca() + ";" +
-                tipoVehiculo + ";" +
-                t.getVehiculo().getRuta() + ";" +
-                t.getVehiculo().getTarifaBase() + ";" +
-                t.getFechaCompra().toString() + ";" +
-                t.getOrigen() + ";" +
-                t.getDestino() + ";" +
+        return t.getPasajero().getCedula()              + ";" +
+                t.getPasajero().getNombre()              + ";" +
+                t.getPasajero().getTipoPasajero()        + ";" +
+                t.getPasajero().getFechaNacimiento()     + ";" +
+                t.getVehiculo().getPlaca()               + ";" +
+                tipoVehiculo                             + ";" +
+                t.getVehiculo().getRuta()                + ";" +
+                t.getVehiculo().getTarifaBase()          + ";" +
+                t.getFechaCompra().toString()            + ";" +
+                t.getOrigen()                            + ";" +
+                t.getDestino()                           + ";" +
                 t.getValorFinal();
     }
 
