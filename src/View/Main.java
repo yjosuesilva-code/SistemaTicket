@@ -1,9 +1,11 @@
 package View;
 import Dao.VehiculoDao;
 import Dao.ConductorDao;
+import Dao.ReservaDao;
 import Dao.PasajeroDao;
 import Dao.TicketDao;
 import Service.VehiculoService;
+import Service.ReservaService;
 import Service.PersonaService;
 import Service.TicketService;
 
@@ -16,19 +18,20 @@ public class Main {
         ConductorDao conductorDao = new ConductorDao();
         PasajeroDao pasajeroDao = new PasajeroDao();
         TicketDao ticketDao = new TicketDao();
+        ReservaDao   reservaDao   = new ReservaDao();
 
 
         VehiculoService vehiculoService = new VehiculoService(vehiculoDao);
         PersonaService personaService = new PersonaService(conductorDao, pasajeroDao);
         TicketService ticketService = new TicketService(ticketDao, vehiculoDao, pasajeroDao);
-
+        ReservaService  reservaService  = new ReservaService(reservaDao, vehiculoDao, pasajeroDao, ticketDao, ticketService);
         Scanner sc = new Scanner(System.in);
 
         VehiculoView vehiculoView = new VehiculoView(vehiculoService, personaService, sc);
         PersonaView personaView = new PersonaView(personaService, sc);
         TicketView ticketView = new TicketView(ticketService, sc);
         ReporteView  reporteView  = new ReporteView(ticketService, sc);
-
+        ReservaView  reservaView  = new ReservaView(reservaService, sc);
         Main menu = new Main();
         menu.ejecutar(vehiculoView, personaView, ticketView, reporteView, sc);
 
@@ -36,7 +39,8 @@ public class Main {
     }
 
     public void ejecutar(VehiculoView vehiculoView, PersonaView personaView,
-                         TicketView ticketView, ReporteView reporteView, Scanner sc) {
+                         TicketView ticketView, ReporteView reporteView,
+                         ReservaView reservaView, Scanner sc) {
         int opcion;
         System.out.println("╔══════════════════════════════════════════╗");
         System.out.println("║    SISTEMA TRANSCESAR S.A.S.             ║");
@@ -51,6 +55,7 @@ public class Main {
             System.out.println("║  2. Gestión de Personas              ║");
             System.out.println("║  3. Gestión de Tickets               ║");
             System.out.println("║  4. Reportes                         ║");
+            System.out.println("║  5. Gestión de Reservas              ║");
             System.out.println("║  0. Salir del sistema                ║");
             System.out.println("╚══════════════════════════════════════╝");
             System.out.print("  Seleccione una opción: ");
@@ -62,6 +67,7 @@ public class Main {
                 case 2: personaView.menuPersonas();    break;
                 case 3: ticketView.menuTickets();      break;
                 case 4: reporteView.menuReportes();    break;
+                case 5: reservaView.menuReservas();    break;
                 case 0:
                     System.out.println("\n  Gracias por usar TransCesar S.A.S.");
                     System.out.println("  ¡Hasta pronto!");
@@ -71,6 +77,7 @@ public class Main {
             }
         } while (opcion != 0);
     }
+
 
     private int leerEntero(Scanner sc) {
         try {
