@@ -43,4 +43,19 @@ public class Reserva {
         return estado == Estado.ACTIVA &&
                 fechaCreacion.isBefore(LocalDateTime.now().minusHours(24));
     }
+    public void imprimirDetalle() {
+        System.out.println("╔══════════════════════════════════════════╗");
+        System.out.println("║          DETALLE – RESERVA               ║");
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.printf( "║  Código         : %-22s║%n", codigo);
+        System.out.printf( "║  Pasajero       : %-22s║%n", pasajero.getNombre());
+        System.out.printf( "║  Cédula         : %-22s║%n", pasajero.getCedula());
+        System.out.printf( "║  Vehículo       : %-22s║%n", vehiculo.getPlaca());
+        System.out.printf( "║  Ruta           : %-22s║%n", vehiculo.getRuta());
+        System.out.printf( "║  Fecha creación : %-22s║%n", fechaCreacion.toString().replace("T", " ").substring(0, 16));
+        System.out.printf( "║  Fecha viaje    : %-22s║%n", fechaViaje.toString());
+        System.out.printf( "║  Estado         : %-22s║%n", estado.toString());
+        System.out.println("╚══════════════════════════════════════════╝");
+    }
+
 }
