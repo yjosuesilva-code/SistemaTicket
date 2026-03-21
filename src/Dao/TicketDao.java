@@ -180,58 +180,50 @@ public class TicketDao {
         }
 
         try {
-            String cedula       = p[0].trim();
-            String nombre       = p[1].trim();
-            String tipoPasajero = p[2].trim().toUpperCase();
+            String    cedula          = p[0].trim();
+            String    nombre          = p[1].trim();
+            String    tipoPasajero    = p[2].trim().toUpperCase();
+            LocalDate fechaNacimiento = LocalDate.parse(p[3].trim());  // campo nuevo
 
             Pasajero pasajero;
             switch (tipoPasajero) {
                 case "REGULAR":
-                    pasajero = new PasajeroRegular(cedula, nombre);
+                    pasajero = new PasajeroRegular(cedula, nombre, fechaNacimiento);
                     break;
                 case "ESTUDIANTE":
-                    pasajero = new PasajeroEstudiante(cedula, nombre);
+                    pasajero = new PasajeroEstudiante(cedula, nombre, fechaNacimiento);
                     break;
                 case "ADULTO_MAYOR":
-                    pasajero = new PasajeroAdultoMayor(cedula, nombre);
+                    pasajero = new PasajeroAdultoMayor(cedula, nombre, fechaNacimiento);
                     break;
                 default:
                     System.err.println("[TicketDAO] Tipo de pasajero desconocido: " + tipoPasajero);
                     return null;
             }
 
-
-            String placa        = p[3].trim();
-            String tipoVehiculo = p[4].trim().toUpperCase();
-            String ruta         = p[5].trim();
-            double tarifaBase   = Double.parseDouble(p[6].trim());
+            String  placa        = p[4].trim();
+            String  tipoVehiculo = p[5].trim().toUpperCase();
+            String  ruta         = p[6].trim();
+            double  tarifaBase   = Double.parseDouble(p[7].trim());
 
             Vehiculo vehiculo;
             switch (tipoVehiculo) {
-                case "BUSETA":
-                    vehiculo = new Buseta(placa, ruta);
-                    break;
-                case "MICROBUS":
-                    vehiculo = new MicroBus(placa, ruta);
-                    break;
-                case "BUS":
-                    vehiculo = new Bus(placa, ruta);
-                    break;
+                case "BUSETA":   vehiculo = new Buseta(placa, ruta);   break;
+                case "MICROBUS": vehiculo = new MicroBus(placa, ruta); break;
+                case "BUS":      vehiculo = new Bus(placa, ruta);      break;
                 default:
                     System.err.println("[TicketDAO] Tipo de vehículo desconocido: " + tipoVehiculo);
                     return null;
             }
             vehiculo.setTarifaBase(tarifaBase);
 
-            LocalDate fecha      = LocalDate.parse(p[7].trim());
-            String    origen     = p[8].trim();
-            String    destino    = p[9].trim();
-            double    valorFinal = Double.parseDouble(p[10].trim());
+            LocalDate fecha      = LocalDate.parse(p[8].trim());
+            String    origen     = p[9].trim();
+            String    destino    = p[10].trim();
+            double    valorFinal = Double.parseDouble(p[11].trim());
 
             Ticket ticket = new Ticket(pasajero, vehiculo, origen, destino);
             ticket.setValorFinal(valorFinal);
-
-
             return ticket;
 
         } catch (Exception e) {
