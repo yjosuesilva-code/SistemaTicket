@@ -1,5 +1,16 @@
 package View;
-
+import Dao.VehiculoDao;
+import Dao.ConductorDao;
+import Dao.PasajeroDao;
+import Dao.TicketDao;
+import Service.VehiculoService;
+import Service.PersonaService;
+import Service.TicketService;
+import View.VehiculoView;
+import View.PersonaView;
+import View.TicketView;
+import View.ReporteView;
+import View.MenuPrincipal;
 import java.util.Scanner;
 
 public class Main {
