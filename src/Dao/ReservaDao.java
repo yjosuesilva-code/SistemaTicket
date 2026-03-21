@@ -168,4 +168,8 @@ public class ReservaDao {
             return null;
         }
     }
+    @Override
+    public String toString() {
+        return "ReservaDao{archivo='" + RUTA_ARCHIVO + "', total=" + lista.size() + "}";
+    }
 }
