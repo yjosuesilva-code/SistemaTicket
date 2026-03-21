@@ -72,15 +72,6 @@ public class TicketService {
             return null;
         }
 
-        Ticket ticket = new Ticket(pasajero, vehiculo, origen, destino);
-
-        vehiculo.setContadorPasajeros(vehiculo.getContadorPasajeros() + 1);
-
-        if (!vehiculo.hayCapacidad()) {
-            vehiculo.setDisponible(false);
-            System.out.println("[TicketService] Aviso: el vehículo " + placaVehiculo + " ha alcanzado su capacidad máxima.");
-        }
-
         LocalDate hoy = LocalDate.now();
         List<Ticket> ticketsHoy = ticketDao.buscarPorFecha(hoy);
         int conteo = 0;
@@ -91,6 +82,25 @@ public class TicketService {
             System.out.println("[TicketService] Error: el pasajero " + pasajero.getNombre()
                     + " ya tiene " + conteo + " ticket(s) comprados hoy. Límite: " + MAX_TICKETS_POR_DIA);
             return null;
+        }
+
+        double tarifaFinal = vehiculo.getTarifaBase();
+        if (esFestivo(hoy)) {
+            tarifaFinal = tarifaFinal * (1 + RECARGO_FESTIVO);
+            System.out.println("[TicketService] Aviso: hoy es festivo. Se aplica recargo del 20%.");
+            vehiculo.setTarifaBase(tarifaFinal);
+        }
+
+        Ticket ticket = new Ticket(pasajero, vehiculo, origen, destino);
+
+        if (esFestivo(hoy)) {
+            vehiculo.setTarifaBase(vehiculo.getTarifaBase() / (1 + RECARGO_FESTIVO));
+        }
+
+        vehiculo.setContadorPasajeros(vehiculo.getContadorPasajeros() + 1);
+        if (!vehiculo.hayCapacidad()) {
+            vehiculo.setDisponible(false);
+            System.out.println("[TicketService] Aviso: el vehículo " + placaVehiculo + " ha alcanzado su capacidad máxima.");
         }
 
         vehiculoDao.actualizar(vehiculo);
