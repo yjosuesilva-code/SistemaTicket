@@ -68,11 +68,30 @@ public class ReservaView {
 
         Reserva reserva = reservaService.crearReserva(cedula, placa, fechaViaje);
         if (reserva != null) {
-            System.out.println("\n  ✔ Reserva creada exitosamente:");
+            System.out.println("\n   Reserva creada exitosamente:");
             reserva.imprimirDetalle();
         } else {
-            System.out.println("  ✘ No se pudo crear la reserva. Revise los datos ingresados.");
+            System.out.println("   No se pudo crear la reserva. Revise los datos ingresados.");
         }
     }
+
+    private void cancelarReserva() {
+        System.out.println("\n── Cancelar Reserva ────────────────────");
+        System.out.print("  Código de la reserva: ");
+        String codigo = sc.nextLine().trim().toUpperCase();
+
+        System.out.print("  ¿Confirma cancelar la reserva " + codigo + "? (1=Sí / 0=No): ");
+        int confirm = leerEntero();
+        if (confirm != 1) {
+            System.out.println("  Operación cancelada.");
+            return;
+        }
+
+        boolean ok = reservaService.cancelarReserva(codigo);
+        System.out.println(ok
+                ? "   Reserva cancelada. El cupo fue liberado."
+                : "   No se pudo cancelar la reserva.");
+    }
+
 
 }
