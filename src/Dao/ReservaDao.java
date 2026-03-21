@@ -99,4 +99,23 @@ public class ReservaDao {
             System.err.println("[ReservaDao] Error al reescribir archivo: " + e.getMessage());
         }
     }
+    private String aLinea(Reserva r) {
+        String tipoVehiculo;
+        if      (r.getVehiculo() instanceof Buseta)   tipoVehiculo = "BUSETA";
+        else if (r.getVehiculo() instanceof MicroBus) tipoVehiculo = "MICROBUS";
+        else                                           tipoVehiculo = "BUS";
+
+        return r.getCodigo()                            + ";" +
+                r.getPasajero().getCedula()              + ";" +
+                r.getPasajero().getNombre()              + ";" +
+                r.getPasajero().getTipoPasajero()        + ";" +
+                r.getPasajero().getFechaNacimiento()     + ";" +
+                r.getVehiculo().getPlaca()               + ";" +
+                tipoVehiculo                             + ";" +
+                r.getVehiculo().getRuta()                + ";" +
+                r.getVehiculo().getTarifaBase()          + ";" +
+                r.getFechaCreacion().toString()          + ";" +
+                r.getFechaViaje().toString()             + ";" +
+                r.getEstado().toString();
+    }
 }
