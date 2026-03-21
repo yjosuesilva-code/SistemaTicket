@@ -130,4 +130,47 @@ public class ReporteView {
         }
     }
 
+    private void resumenDiaActual() {
+        LocalDate hoy = LocalDate.now();
+        List<Ticket> ticketsHoy = ticketService.buscarTicketsPorFecha(hoy);
+
+        double total = 0;
+        int regulares = 0, estudiantes = 0, adultos = 0;
+        for (Ticket t : ticketsHoy) {
+            total += t.getValorFinal();
+            switch (t.getPasajero().getTipoPasajero().toUpperCase()) {
+                case "REGULAR":      regulares++; break;
+                case "ESTUDIANTE":   estudiantes++; break;
+                case "ADULTO_MAYOR": adultos++; break;
+            }
+        }
+
+        System.out.println("\n╔══════════════════════════════════════════╗");
+        System.out.println("║          RESUMEN DEL DÍA ACTUAL          ║");
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.printf( "║  Fecha              : %-18s  ║%n", hoy.toString());
+        System.out.printf( "║  Festivo            : %-18s  ║%n", ticketService.esFestivo(hoy) ? "Sí (+20%)" : "No");
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.printf( "║  Total tickets      : %-18d  ║%n", ticketsHoy.size());
+        System.out.printf( "║  Total recaudado    : $%-17.0f  ║%n", total);
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.printf( "║  Pasajeros regulares: %-18d  ║%n", regulares);
+        System.out.printf( "║  Pasajeros estud.   : %-18d  ║%n", estudiantes);
+        System.out.printf( "║  Adultos mayores    : %-18d  ║%n", adultos);
+        System.out.println("╚══════════════════════════════════════════╝");
+
+        if (!ticketsHoy.isEmpty()) {
+            System.out.println("\n  Detalle de tickets de hoy:");
+            for (Ticket t : ticketsHoy) t.imprimirDetalle();
+        }
+    }
+
+    private int leerEntero() {
+        try {
+            return Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
 }
