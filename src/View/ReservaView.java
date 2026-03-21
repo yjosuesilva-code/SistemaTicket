@@ -90,6 +90,17 @@ public class ReservaView {
                 ? "   Reserva cancelada. El cupo fue liberado."
                 : "   No se pudo cancelar la reserva.");
     }
+    private void listarActivas() {
+        List<Reserva> lista = reservaService.listarActivas();
+        System.out.println("\n── Reservas Activas (" + lista.size() + ") ───────────────");
+        if (lista.isEmpty()) {
+            System.out.println("  No hay reservas activas en el sistema.");
+            return;
+        }
+        for (Reserva r : lista) {
+            r.imprimirDetalle();
+        }
+    }
 
     private void historialPorPasajero() {
         System.out.println("\n── Historial de Reservas por Pasajero ──");
