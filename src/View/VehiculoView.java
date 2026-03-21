@@ -9,7 +9,7 @@ import Service.VehiculoService;
 import java.util.List;
 import java.util.Scanner;
 import Service.PersonaService;
-import Model.Coductor;
+import Model.Conductor;
 
 public class VehiculoView {
     private VehiculoService vehiculoService;
