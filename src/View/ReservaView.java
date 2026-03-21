@@ -140,6 +140,17 @@ public class ReservaView {
         }
     }
 
+    private LocalDate leerFecha(String mensaje) {
+        System.out.print(mensaje);
+        String input = sc.nextLine().trim();
+        try {
+            return LocalDate.parse(input);
+        } catch (DateTimeParseException e) {
+            System.out.println("   Formato de fecha inválido. Use yyyy-MM-dd (ej: 2026-04-15).");
+            return null;
+        }
+    }
+
 
 
 }
