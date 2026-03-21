@@ -67,4 +67,14 @@ public class ReservaDao {
         }
         return count;
     }
+    public boolean actualizarEstado(String codigo, Reserva.Estado nuevoEstado) {
+        for (Reserva r : lista) {
+            if (r.getCodigo().equalsIgnoreCase(codigo)) {
+                r.setEstado(nuevoEstado);
+                escribirArchivo();
+                return true;
+            }
+        }
+        return false;
+    }
 }
