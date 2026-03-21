@@ -36,4 +36,13 @@ public class ReservaDao {
         }
         return lista;
     }
+    public List<Reserva> listarTodos() {
+        return new ArrayList<>(lista);
+    }
+    public List<Reserva> listarActivas() {
+        List<Reserva> activas = new ArrayList<>();
+        for (Reserva r : lista)
+            if (r.getEstado() == Reserva.Estado.ACTIVA) activas.add(r);
+        return activas;
+    }
 }
