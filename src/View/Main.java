@@ -33,7 +33,7 @@ public class Main {
         ReporteView  reporteView  = new ReporteView(ticketService, sc);
         ReservaView  reservaView  = new ReservaView(reservaService, sc);
         Main menu = new Main();
-        menu.ejecutar(vehiculoView, personaView, ticketView, reporteView, sc);
+        menu.ejecutar(vehiculoView, personaView, ticketView, reporteView,reservaView ,sc);
 
         sc.close();
     }
