@@ -61,4 +61,39 @@ public class ReporteView {
         }
     }
 
+    private void reportePorTipoVehiculo() {
+        System.out.println("\n  Tipo de vehículo:");
+        System.out.println("  1. Buseta   2. MicroBus   3. Bus");
+        System.out.print("  Seleccione: ");
+        int op = leerEntero();
+
+        String tipoNombre;
+        Class<?> tipoClase;
+        switch (op) {
+            case 1: tipoNombre = "BUSETA";   tipoClase = Buseta.class;   break;
+            case 2: tipoNombre = "MICROBUS"; tipoClase = MicroBus.class; break;
+            case 3: tipoNombre = "BUS";      tipoClase = Bus.class;      break;
+            default:
+                System.out.println("  Opción inválida.");
+                return;
+        }
+
+        List<Ticket> todos = ticketService.listarTickets();
+        System.out.println("\n── Tickets en " + tipoNombre + " ────────────────────");
+        int conteo = 0;
+        double total = 0;
+        for (Ticket t : todos) {
+            if (tipoClase.isInstance(t.getVehiculo())) {
+                t.imprimirDetalle();
+                total += t.getValorFinal();
+                conteo++;
+            }
+        }
+        if (conteo == 0) {
+            System.out.println("  No hay tickets para ese tipo de vehículo.");
+        } else {
+            System.out.printf("  Total tickets: %d | Total recaudado: $%.0f%n", conteo, total);
+        }
+    }
+
 }
