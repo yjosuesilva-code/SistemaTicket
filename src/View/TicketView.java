@@ -9,32 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
- * TicketView
- * Interfaz de consola para la gestión de tickets.
- * Solo interactúa con TicketService, nunca con el DAO directamente.
- *
- * Capa: View
- * Proyecto: TransCesar S.A.S.
- */
+
 
 public class TicketView {
 
-    // ─── Dependencias ─────────────────────────────────────────────────────────
     private TicketService ticketService;
     private Scanner       sc;
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // CONSTRUCTOR
-    // ─────────────────────────────────────────────────────────────────────────
+
     public TicketView(TicketService ticketService, Scanner sc) {
         this.ticketService = ticketService;
         this.sc            = sc;
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // MENÚ PRINCIPAL DE TICKETS
-    // ─────────────────────────────────────────────────────────────────────────
+
     public void menuTickets() {
         int opcion;
         do {
@@ -67,9 +55,7 @@ public class TicketView {
         } while (opcion != 0);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 1. VENDER TICKET
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void venderTicket() {
         System.out.println("\n── Vender Ticket ───────────────────────");
         System.out.print("  Cédula del pasajero: ");
@@ -90,9 +76,7 @@ public class TicketView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 2. LISTAR TODOS LOS TICKETS
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void listarTickets() {
         List<Ticket> lista = ticketService.listarTickets();
         System.out.println("\n── Todos los Tickets (" + lista.size() + ") ──────────────");
@@ -105,9 +89,7 @@ public class TicketView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 3. BUSCAR POR PASAJERO
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void buscarPorPasajero() {
         System.out.print("\n  Cédula del pasajero: ");
         String cedula = sc.nextLine().trim();
@@ -122,9 +104,7 @@ public class TicketView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 4. BUSCAR POR VEHÍCULO
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void buscarPorVehiculo() {
         System.out.print("\n  Placa del vehículo: ");
         String placa = sc.nextLine().trim().toUpperCase();
@@ -139,9 +119,7 @@ public class TicketView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 5. BUSCAR POR FECHA
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void buscarPorFecha() {
         System.out.print("\n  Fecha (formato yyyy-MM-dd, ej. 2025-03-10): ");
         String fechaStr = sc.nextLine().trim();
@@ -161,9 +139,7 @@ public class TicketView {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 6. CANCELAR TICKET
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void cancelarTicket() {
         System.out.println("\n── Cancelar Ticket ─────────────────────");
         System.out.print("  Cédula del pasajero: ");
@@ -175,7 +151,6 @@ public class TicketView {
             return;
         }
 
-        // Mostrar tickets del pasajero para que elija
         System.out.println("  Tickets del pasajero:");
         for (int i = 0; i < tickets.size(); i++) {
             Ticket t = tickets.get(i);
@@ -214,9 +189,7 @@ public class TicketView {
                 : "  ✘ No se pudo cancelar el ticket.");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // 7. ESTADÍSTICAS
-    // ─────────────────────────────────────────────────────────────────────────
+
     private void mostrarEstadisticas() {
         System.out.println();
         ticketService.mostrarEstadisticas();
@@ -229,9 +202,7 @@ public class TicketView {
         System.out.printf("  Adulto Mayor : %d tickets%n", porTipo.getOrDefault("ADULTO_MAYOR", 0));
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // HELPER — leer entero con manejo de error
-    // ─────────────────────────────────────────────────────────────────────────
+
     private int leerEntero() {
         try {
             return Integer.parseInt(sc.nextLine().trim());
